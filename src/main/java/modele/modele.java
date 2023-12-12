@@ -12,13 +12,14 @@ public class modele {
 	public static Utilisateur selectWhereUtilisateur(String email, String mdp_utilisateur) {
 		String req ="select * from utilisateurs where email= '"+email+"' and mdp_utilisateur='"+mdp_utilisateur+"' ; "; 
 		Utilisateur unUtilisateur= null;
+		System.out.println(req);
 		try {
 			maConnexion.seConnecter();
 			java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
 			ResultSet desRes = unStat.executeQuery(req);
 			if (desRes.next()) {
 				unUtilisateur = new Utilisateur (
-						desRes.getInt ("idutilisateur"),desRes.getInt("id_role"),
+						desRes.getInt ("id_utilisateur"),desRes.getInt("id_role"),
 						desRes.getString("nom"),desRes.getString ("prenom"), desRes.getString("email"), 
 						desRes.getString("age"), desRes.getString("mdp_utilisateur"), 
 						desRes.getString("telephone"), desRes.getString("date_inscription") 

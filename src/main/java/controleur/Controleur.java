@@ -1,5 +1,4 @@
 package controleur;
-
 import modele.modele;
 
 public class Controleur {
