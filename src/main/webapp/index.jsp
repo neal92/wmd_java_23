@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page import="controleur.*"  %>
+    pageEncoding="ISO-8859-1" %>
+<%@ page import="controleur.*" %>
  <%@ page import="java.util.ArrayList"  %>
 <!DOCTYPE html>
 <html>
@@ -52,7 +52,7 @@
 			}
 			switch(unePage){
 			case 1 :
-			%><%@ include file="donation.jsp" %> <% break;
+			%> <%@ include file="donation.jsp" %> <% break;
 			case 2 : session.invalidate();
 				response.sendRedirect("index.jsp");
 			break;

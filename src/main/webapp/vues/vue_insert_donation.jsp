@@ -13,48 +13,48 @@
             <tr>
                 <td>ID Utilisateur</td>
                 <td>
-                    <input type="text" name="id_utilisateur" value='<%= (leDonation != null) ? leDonation.getId_utilisateur() : "" %>'>
+                    <input type="text" name="id_utilisateur" value='<%= (unDonation != null) ? unDonation.getId_utilisateur() : "" %>'>
                 </td>
             </tr>
             <tr>
                 <td>ID Projet Car</td>
                 <td>
-                    <input type="text" name="id_projetcar" value='<%= (leDonation != null) ? leDonation.getId_projetcar() : "" %>'>
+                    <input type="text" name="id_projetcar" value='<%= (unDonation != null) ? unDonation.getId_projetcar() : "" %>'>
                 </td>
             </tr>
             <tr>
                 <td>ID Catedon</td>
                 <td>
-                    <input type="text" name="id_catedon" value='<%= (leDonation != null) ? leDonation.getId_catedon() : "" %>'>
+                    <input type="text" name="id_catedon" value='<%= (unDonation != null) ? unDonation.getId_catedon() : "" %>'>
                 </td>
             </tr>
             <tr>
                 <td>ID Imagep</td>
                 <td>
-                    <input type="text" name="id_imagep" value='<%= (leDonation != null) ? leDonation.getId_imagep() : "" %>'>
+                    <input type="text" name="id_imagep" value='<%= (unDonation != null) ? unDonation.getId_imagep() : "" %>'>
                 </td>
             </tr>
             <tr>
                 <td>Montant Don</td>
                 <td>
-                    <input type="text" name="montant_don" value='<%= (leDonation != null) ? leDonation.getMontant_don() : "" %>'>
+                    <input type="text" name="montant_don" value='<%= (unDonation != null) ? unDonation.getMontant_don() : "" %>'>
                 </td>
             </tr>
             <tr>
                 <td>Date Don</td>
                 <td>
-                    <input type="text" name="date_don" value='<%= (leDonation != null) ? leDonation.getDate_don() : "" %>'>
+                    <input type="text" name="date_don" value='<%= (unDonation != null) ? unDonation.getDate_don() : "" %>'>
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <input type="submit" <%= (leDonation != null) ? "name='Modifier' value='Modifier'" : "name='Valider' value='Valider'" %>>
+                    <input type="submit" <%= (unDonation != null) ? "name='Modifier' value='Modifier'" : "name='Valider' value='Valider'" %>>
                 </td>
             </tr>
         </table>
         <!-- Ajoutez des champs cachés pour d'autres attributs de la classe Donation -->
-        <%= (leDonation != null) ? "<input type='hidden' name='idDonation' value='" + leDonation.getId_donnation() + "'>" : "" %>
+        <%= (unDonation != null) ? "<input type='hidden' name='idDonation' value='" + unDonation.getId_donnation() + "'>" : "" %>
     </form>
 </body>
 </html>
