@@ -1,6 +1,10 @@
 package modele;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import controleur.Donation;
 
 import controleur.Utilisateur;
 
@@ -8,7 +12,7 @@ public class modele {
 	private static Connexion maConnexion = new Connexion ("localhost", "wmd_23", "root", "root");
 	
 	
-	/****************Utilisateur ********************/
+	/****************Gesstion des Utilisateurs ********************/
 	public static Utilisateur selectWhereUtilisateur(String email, String mdp_utilisateur) {
 		String req ="select * from utilisateurs where email= '"+email+"' and mdp_utilisateur='"+mdp_utilisateur+"' ; "; 
 		Utilisateur unUtilisateur= null;
@@ -34,5 +38,158 @@ public class modele {
 		return unUtilisateur;
 		
 	}
+	
+	
+	
+	/******************GESTTION DES Donations*************************/
+	public static void insertDonation (Donation unDonation) {
+		String req = "insert into donnations values (null, '"+unDonation.getMontant_don()+"','"
+				+unDonation.getDate_don()+"', '"+unDonation.getId_utilisateur()+"','"+unDonation.getId_projetcar()+"', '"
+				+unDonation.getId_catedon()+"', '"+unDonation.getId_imagep()+"'); ";
+		try {
+			maConnexion.seConnecter();
+			Statement unStat = (Statement) maConnexion.getMaConnexion().createStatement();
+			unStat.execute(req);
+			unStat.close();
+			maConnexion.seDeconnecter();
+			
+		}
+		catch (SQLException exp) {
+			System.out.println("Erreur d'execution : " +req);
+		}
+		
+	}
+	
+	public static ArrayList<Donation> selectAllDonation(){
+		String req ="select * from donnations;";
+		ArrayList<Donation> lesDonations = new ArrayList<Donation>();
+		try {
+			maConnexion.seConnecter();
+			java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
+			ResultSet desRes = unStat.executeQuery(req);
+			while(desRes.next()) {
+				Donation unDonation =new Donation (
+					    desRes.getInt("id_donnation"), 
+					    desRes.getInt("id_utilisateur"),
+					    desRes.getInt("id_projetcar"), 
+					    desRes.getInt("id_catedon"), 
+					    desRes.getInt("id_imagep"), 
+					    desRes.getString("montant_don"), 
+					   desRes.getString("date_don")
+					);
 
+				lesDonations.add(unDonation);			
+			}
+			unStat.close();
+			maConnexion.seDeconnecter();
+			
+		}
+		catch (SQLException exp) {
+			System.out.println("Erreur d'execution : " +req);
+		}
+		return lesDonations;
+		
+	}
+	
+	public static void deleteDonation (int id_donnation) {
+		String req = "delete from Donation where id_donnation= "+id_donnation+";";
+		try {
+			maConnexion.seConnecter();
+			Statement unStat = (Statement) maConnexion.getMaConnexion().createStatement();
+			unStat.execute(req);
+			unStat.close();
+			maConnexion.seDeconnecter();
+			
+		}
+		catch (SQLException exp) {
+			System.out.println("Erreur d'execution : " +req);
+		}
+		
+	}
+	
+	public static Donation selectWhereDonation(int id_donnation) {
+		String req ="select * from donnations where id_donnation= "+id_donnation+";"; 
+		Donation unDonation = null;
+		try {
+			maConnexion.seConnecter();
+			java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
+			ResultSet desRes = unStat.executeQuery(req);
+			if (desRes.next()) {
+				 unDonation =new Donation (
+					    desRes.getInt("id_donnation"), 
+					    desRes.getInt("id_utilisateur"),
+					    desRes.getInt("id_projetcar"), 
+					    desRes.getInt("id_catedon"), 
+					    desRes.getInt("id_imagep"), 
+					    desRes.getString("montant_don"), 
+					   desRes.getString("date_don")
+					);
+	
+			}
+			unStat.close();
+			maConnexion.seDeconnecter();
+			
+		}
+		catch (SQLException exp) {
+			System.out.println("Erreur d'execution : " +req);
+		}
+		return unDonation;
+		
+	}
+	
+	public static void updateDonation (Donation unDonation) {
+		String req = "update donnations set id_utilisateur= '"+unDonation.getId_utilisateur()+"',id_projetcar ='"+unDonation.getId_projetcar()
+						+"',id_catedon ='"+unDonation.getId_catedon()+"',id_imagep ='"+unDonation.getId_imagep()+
+						"',montant_don ='"+unDonation.getMontant_don()+"',date_don ='"+unDonation.getDate_don()+
+						"',where id_donnation = "+unDonation.getId_donnation()+"; ";
+		try {
+			maConnexion.seConnecter();
+			Statement unStat = (Statement) maConnexion.getMaConnexion().createStatement();
+			unStat.execute(req);
+			unStat.close();
+			maConnexion.seDeconnecter();
+			
+		}
+		catch (SQLException exp) {
+			System.out.println("Erreur d'execution : " +req);
+		}
+		
+	}
+	
+	public static ArrayList<Donation> selectLikeDonations(String filtre){
+		String req = "SELECT * FROM donnation " +
+	             "WHERE id_utilisateur LIKE '%" + filtre + "%' " +
+	             "OR id_projetcar LIKE '%" + filtre + "%' " +
+	             "OR id_catedon LIKE '%" + filtre + "%' " +
+	             "OR id_imagep LIKE '%" + filtre + "%' " +
+	             "OR montant_don LIKE '%" + filtre + "%' " +
+	             "OR date_don LIKE '%" + filtre + "%';";
+
+		ArrayList<Donation> lesDonations = new ArrayList<Donation>();
+		try {
+			maConnexion.seConnecter();
+			java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
+			ResultSet desRes = unStat.executeQuery(req);
+			while(desRes.next()) {
+				Donation unDonation =new Donation (
+					    desRes.getInt("id_donnation"), 
+					    desRes.getInt("id_utilisateur"),
+					    desRes.getInt("id_projetcar"), 
+					    desRes.getInt("id_catedon"), 
+					    desRes.getInt("id_imagep"), 
+					    desRes.getString("montant_don"), 
+					   desRes.getString("date_don")
+					);
+
+				lesDonations.add(unDonation);			
+			}
+			unStat.close();
+			maConnexion.seDeconnecter();
+		
+	}catch (SQLException exp) {
+		System.out.println("Erreur d'execution : " +req);
+	}
+		return lesDonations;
+	}
+	
 }

@@ -10,7 +10,7 @@
 </head>
 <body>
 <center>
-	<h1> Gestion des affectations WeMakeDonation </h1>
+	<h1> Gestion de WeMakeDonation </h1>
 	<%
 	if(session.getAttribute("email") == null){
 	
@@ -34,7 +34,7 @@
 			out.print("<br> Veuillez vérifier vos identifiants");
 		}
 	}
-	String menu = "<a href ='index.jsp?page=1'><img src =\'images/donation.jpg' height='100' width='100'> </a>";
+	String menu = "<a href ='index.jsp?page=1'><img src =\'images/donation.jpg' height='100' width='200'> </a>";
 	menu +="<a href ='index.jsp?page=2'><img src ='images/projet.png' height='100'width='100'> </a>";
 	menu +="<a href ='index.jsp?page=3'>DECONNEXION </a>";
 	if (session.getAttribute("email") !=null){
@@ -50,7 +50,13 @@
 			}else{
 		unePage = 1;
 			}
-
+			switch(unePage){
+			case 1 :
+			%><%@ include file="donation.jsp" %> <% break;
+			case 2 : session.invalidate();
+				response.sendRedirect("index.jsp");
+			break;
+			}
 	
 	} //fin du if session
 	
