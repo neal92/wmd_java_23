@@ -6,7 +6,7 @@
 <%
     String action = "";
     int id_donnation = 0;
-    Donation unDonation = null;
+    Donation leDonation = null;
 
     if (request.getParameter("action") != null && request.getParameter("id_donnation") != null) {
         action = request.getParameter("action");
@@ -17,7 +17,7 @@
                 Controleur.deleteDonation(id_donnation);
                 break;
             case "edit":
-                unDonation = Controleur.selectWhereDonation(id_donnation);
+            	leDonation = Controleur.selectWhereDonation(id_donnation);
                 break;
         }
     }
@@ -36,7 +36,7 @@
         
 
         // instanciation de la classe Donation
-         unDonation = new Donation(id_utilisateur, id_projetcar, id_catedon, id_imagep, montant_don, date_don);
+         Donation unDonation = new Donation(id_utilisateur, id_projetcar, id_catedon, id_imagep, montant_don, date_don);
         // insertion dans la base de données
         Controleur.insertDonation(unDonation);
         out.print("<br> Insertion réussie dans la base ");
@@ -52,13 +52,13 @@
   
 
         // instanciation de la classe Donation
-        unDonation = new Donation(id_utilisateur, id_projetcar, id_catedon, id_imagep, montant_don, date_don);
+       Donation unDonation = new Donation(id_utilisateur, id_projetcar, id_catedon, id_imagep, montant_don, date_don);
         // mise à jour dans la base de données
         Controleur.updateDonation(unDonation);
         out.print("<br> Mise à jour réussie dans la base ");
     }
 
-    ArrayList<Donation> lesDonations = Controleur.selectAllDonations();
+    ArrayList<VueDonnation> lesDonations = Controleur.selectAllVueDonations();
 %>
 
 <%@ include file="vues/vue_select_donation.jsp" %>

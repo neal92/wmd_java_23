@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import controleur.Donation;
 
 import controleur.Utilisateur;
+import controleur.VueDonnation;
 
 public class modele {
 	private static Connexion maConnexion = new Connexion ("localhost", "wmd_23", "root", "root");
@@ -76,6 +77,42 @@ public class modele {
 					    desRes.getInt("id_imagep"), 
 					    desRes.getString("montant_don"), 
 					   desRes.getString("date_don")
+					);
+
+				lesDonations.add(unDonation);			
+			}
+			unStat.close();
+			maConnexion.seDeconnecter();
+			
+		}
+		catch (SQLException exp) {
+			System.out.println("Erreur d'execution : " +req);
+		}
+		return lesDonations;
+		
+	}
+	
+	public static ArrayList<VueDonnation> selectAllVueDonation(){
+		String req ="select * from vueDonations;";
+		ArrayList<VueDonnation> lesDonations = new ArrayList<VueDonnation>();
+		try {
+			maConnexion.seConnecter();
+			java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
+			ResultSet desRes = unStat.executeQuery(req);
+			while(desRes.next()) {
+				VueDonnation unDonation =new VueDonnation (
+					    desRes.getInt("id_donnation"), 
+					    desRes.getInt("id_utilisateur"),
+					    desRes.getInt("id_projetcar"), 
+					    desRes.getInt("id_catedon"), 
+					    desRes.getInt("id_imagep"), 
+					    desRes.getString("montant_don"), 
+					   desRes.getString("date_don"), 
+					   desRes.getString("nom"),
+					   desRes.getString("prenom"),  
+					   desRes.getString("nom_cate_proj"),
+					   desRes.getString("nom_cate_don"),
+					   desRes.getString("nom_image_p")
 					);
 
 				lesDonations.add(unDonation);			

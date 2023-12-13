@@ -21,6 +21,12 @@ public class Controleur {
 	public static ArrayList<Donation> selectAllDonations (){
 		return modele.selectAllDonation();
 	}
+	
+	public static ArrayList<VueDonnation> selectAllVueDonations (){
+		return modele.selectAllVueDonation();
+	}
+	
+	
 	public static ArrayList<Donation> selectLikeDonations (String filtre){
 		return modele.selectLikeDonations(filtre);
 	}

@@ -11,23 +11,23 @@
     <table border="1">
         <tr>
             <td>Id Donation</td>
-            <td>ID Utilisateur</td>
-            <td>ID Projet Car</td>
-            <td>ID Catedon</td>
-            <td>ID Imagep</td>
+            <td>Utilisateur</td>
+            <td>Projet Car</td>
+            <td>Catedon</td>
+            <td>Imagep</td>
             <td>Montant Don</td>
             <td>Date Don</td>
             <td>Opérations</td>
         </tr>
         <%
             String chaineDonations = "";
-            for (Donation uneDonation : lesDonations) {
+            for (VueDonnation uneDonation : lesDonations) {
                 chaineDonations += "<tr>";
                 chaineDonations += "<td>" + uneDonation.getId_donnation() + "</td>";
-                chaineDonations += "<td>" + uneDonation.getId_utilisateur() + "</td>";
-                chaineDonations += "<td>" + uneDonation.getId_projetcar() + "</td>";
-                chaineDonations += "<td>" + uneDonation.getId_catedon() + "</td>";
-                chaineDonations += "<td>" + uneDonation.getId_imagep() + "</td>";
+                chaineDonations += "<td>" + uneDonation.getNom() + "</td>";
+                chaineDonations += "<td>" + uneDonation.getNomproj() + "</td>";
+                chaineDonations += "<td>" + uneDonation.getNomdon()+ "</td>";
+                chaineDonations += "<td>" + uneDonation.getNomimage() + "</td>";
                 chaineDonations += "<td>" + uneDonation.getMontant_don() + "</td>";
                 chaineDonations += "<td>" + uneDonation.getDate_don() + "</td>";
                 chaineDonations += "<td>";

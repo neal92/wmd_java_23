@@ -53,7 +53,7 @@
 			switch(unePage){
 			case 1 :
 			%> <%@ include file="donation.jsp" %> <% break;
-			case 2 : session.invalidate();
+			case 3 : session.invalidate();
 				response.sendRedirect("index.jsp");
 			break;
 			}
