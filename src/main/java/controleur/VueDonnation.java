@@ -1,19 +1,22 @@
 package controleur;
 
 public class VueDonnation {
-		private int id_donnation, id_utilisateur, id_projetcar, id_catedon, id_imagep;
+		private int id_donnation, id_utilisateur, id_projetcar, id_catedon, id_imagep,id_assocarita;
 		private String montant_don, date_don;
 		private String nom, prenom; 
-		private String nomproj, nomdon, nomimage;
+		private String nomproj, nomdon, nomimage, nom_asso_carita;
+		
 		public VueDonnation(int id_donnation, int id_utilisateur, int id_projetcar, int id_catedon, int id_imagep,
+				int id_assocarita,
 				String montant_don, String date_don, String nom, String prenom, String nomproj, String nomdon,
-				String nomimage) {
+				String nomimage, String nom_asso_carita) {
 			super();
 			this.id_donnation = id_donnation;
 			this.id_utilisateur = id_utilisateur;
 			this.id_projetcar = id_projetcar;
 			this.id_catedon = id_catedon;
 			this.id_imagep = id_imagep;
+			this.id_assocarita =id_assocarita;
 			this.montant_don = montant_don;
 			this.date_don = date_don;
 			this.nom = nom;
@@ -21,17 +24,19 @@ public class VueDonnation {
 			this.nomproj = nomproj;
 			this.nomdon = nomdon;
 			this.nomimage = nomimage;
+			this.nom_asso_carita = nom_asso_carita;
 		}
 		
-		public VueDonnation( int id_utilisateur, int id_projetcar, int id_catedon, int id_imagep,
+		public VueDonnation( int id_utilisateur, int id_projetcar, int id_catedon, int id_imagep, int id_assocarita,
 				String montant_don, String date_don, String nom, String prenom, String nomproj, String nomdon,
-				String nomimage) {
+				String nomimage, String nom_asso_carita) {
 			super();
 			this.id_donnation = 0; 
 			this.id_utilisateur = id_utilisateur;
 			this.id_projetcar = id_projetcar;
 			this.id_catedon = id_catedon;
 			this.id_imagep = id_imagep;
+			this.id_assocarita = id_assocarita;
 			this.montant_don = montant_don;
 			this.date_don = date_don;
 			this.nom = nom;
@@ -39,6 +44,7 @@ public class VueDonnation {
 			this.nomproj = nomproj;
 			this.nomdon = nomdon;
 			this.nomimage = nomimage;
+			this.nom_asso_carita = nom_asso_carita;
 		}
 
 		public int getId_donnation() {
@@ -79,6 +85,14 @@ public class VueDonnation {
 
 		public void setId_imagep(int id_imagep) {
 			this.id_imagep = id_imagep;
+		}
+
+		public int getId_assocarita() {
+			return id_assocarita;
+		}
+
+		public void setId_assocarita(int id_assocarita) {
+			this.id_assocarita = id_assocarita;
 		}
 
 		public String getMontant_don() {
@@ -136,5 +150,14 @@ public class VueDonnation {
 		public void setNomimage(String nomimage) {
 			this.nomimage = nomimage;
 		}
+
+		public String getNom_asso_carita() {
+			return nom_asso_carita;
+		}
+
+		public void setNom_asso_carita(String nom_asso_carita) {
+			this.nom_asso_carita = nom_asso_carita;
+		}
+
 		
 		}

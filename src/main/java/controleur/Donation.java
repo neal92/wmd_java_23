@@ -2,27 +2,29 @@ package controleur;
 
 
 public class Donation {
-	private int id_donnation, id_utilisateur, id_projetcar, id_catedon, id_imagep;
+	private int id_donnation, id_utilisateur, id_projetcar, id_catedon, id_imagep,id_assocarita;
 	private String montant_don, date_don;
 	
-	public Donation(int id_donnation,int id_utilisateur,int id_projetcar,int id_catedon,int id_imagep, String montant_don, String date_don) {
+	public Donation(int id_donnation,int id_utilisateur,int id_projetcar,int id_catedon,int id_imagep,int id_assocarita, String montant_don, String date_don) {
 		super();
 		this.id_donnation = id_donnation;
 		this.id_utilisateur = id_utilisateur;
 		this.id_projetcar = id_projetcar;
 		this.id_catedon = id_catedon;
 		this.id_imagep = id_imagep;
+		this.id_assocarita = id_assocarita;
 		this.montant_don = montant_don;
 		this.date_don = date_don;
 	}
 	
-	public Donation(int id_utilisateur,int id_projetcar,int id_catedon,int id_imagep, String montant_don, String date_don) {
+	public Donation(int id_utilisateur,int id_projetcar,int id_catedon,int id_imagep,int id_assocarita, String montant_don, String date_don) {
 		super();
 		this.id_donnation = 0;
 		this.id_utilisateur = id_utilisateur;
 		this.id_projetcar = id_projetcar;
 		this.id_catedon = id_catedon;
 		this.id_imagep = id_imagep;
+		this.id_assocarita = id_assocarita;
 		this.montant_don = montant_don;
 		this.date_don = date_don;
 	}
@@ -34,6 +36,7 @@ public class Donation {
 		this.id_projetcar = 0;
 		this.id_catedon = 0;
 		this.id_imagep = 0;
+		this.id_assocarita = 0;
 		this.montant_don = montant_don;
 		this.date_don = date_don;
 	}
@@ -78,6 +81,14 @@ public class Donation {
 		this.id_imagep = id_imagep;
 	}
 
+	public int getId_assocarita() {
+		return id_assocarita;
+	}
+
+	public void setId_assocarita(int id_assocarita) {
+		this.id_assocarita = id_assocarita;
+	}
+
 	public String getMontant_don() {
 		return montant_don;
 	}
@@ -93,6 +104,6 @@ public class Donation {
 	public void setDate_don(String date_don) {
 		this.date_don = date_don;
 	}
-	
 
+	
 }

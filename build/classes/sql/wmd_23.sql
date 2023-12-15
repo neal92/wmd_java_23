@@ -150,21 +150,23 @@
         FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id_utilisateur)
     );
 
-    -- Création de la table Donnations
     CREATE TABLE donnations (
         id_donnation INT AUTO_INCREMENT,
         montant_don DECIMAL(10, 2),
         date_don DATE,
         id_utilisateur INT,
+        id_assocarita INT,
         id_projetcar INT,
         id_catedon INT,
         id_imagep INT,
         PRIMARY KEY (id_donnation),
         FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id_utilisateur),
+        FOREIGN KEY (id_assocarita) REFERENCES asso_carita(id_assocarita),
         FOREIGN KEY (id_projetcar) REFERENCES projets_carita(id_projetcar),
-        FOREIGN KEY (id_catedon) REFERENCES cate_don (id_catedon),
+        FOREIGN KEY (id_catedon) REFERENCES cate_don(id_catedon),
         FOREIGN KEY (id_imagep) REFERENCES images_p(id_imagep)
     );
+
 
     -- Rajouter dans la table paiements la clé étrangère de la table donnation -- 
     ALTER TABLE paiements
@@ -205,6 +207,30 @@
         FOREIGN KEY (id_activite) REFERENCES activites(id_activite),
         FOREIGN KEY (id_sejour) REFERENCES sejours(id_sejour)
     );
+
+        -- Creation VueDonnation
+        CREATE VIEW vueDonations AS (
+        SELECT
+            d.*,
+            u.nom,
+            u.prenom,
+            p.nom_cate_proj,
+            dc.nom_cate_don,
+            i.nom_image_p,
+            ac.nom_asso_carita  -- Ajout du champ nom_asso_carita
+        FROM
+            donnations d
+        JOIN utilisateurs u ON d.id_utilisateur = u.id_utilisateur
+        JOIN cate_projets p ON d.id_projetcar = p.id_cateproj
+        JOIN cate_don dc ON d.id_catedon = dc.id_catedon
+        JOIN images_p i ON d.id_imagep = i.id_imagep
+        LEFT JOIN asso_carita ac ON d.id_assocarita = ac.id_assocarita
+    );
+
+    --Insert Donnations
+    INSERT INTO donnations (montant_don, date_don, id_utilisateur, id_assocarita, id_projetcar, id_catedon, id_imagep)
+    VALUES (100.00, '2023-12-06', 1, 1, 1, 2, 1);
+
 
 
     --- Insert table Sejour ---
@@ -266,6 +292,10 @@
     INSERT INTO cate_don (nom_cate_don, descrip_cate_don) VALUES
     ('Mensuelle','Ce type de donnation  effectue tout les mois');
 
+
+    -- Insert ImageP
+    INSERT INTO images_p (nom_image_p, chemin_image_p, id_projetcar)
+    VALUES ('Nom', '/chemin/vers/image.jpg', 1);
 
     --insert Activités-- 
 

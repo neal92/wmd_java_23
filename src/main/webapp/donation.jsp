@@ -14,10 +14,10 @@
 
         switch (action) {
             case "sup":
-                Controleur.deleteDonation(id_donnation);
+                controleur.Controleur.deleteDonation(id_donnation);
                 break;
             case "edit":
-            	leDonation = Controleur.selectWhereDonation(id_donnation);
+            	leDonation = controleur.Controleur.selectWhereDonation(id_donnation);
                 break;
         }
     }
@@ -31,15 +31,16 @@
         int id_projetcar = Integer.parseInt(request.getParameter("id_projetcar"));
         int id_catedon = Integer.parseInt(request.getParameter("id_catedon"));
         int id_imagep = Integer.parseInt(request.getParameter("id_imagep"));
+        int id_assocarita = Integer.parseInt(request.getParameter("id_assocarita"));
         String montant_don = request.getParameter("montant_don");
         String date_don = request.getParameter("date_don");
         
 
         // instanciation de la classe Donation
-         Donation unDonation = new Donation(id_utilisateur, id_projetcar, id_catedon, id_imagep, montant_don, date_don);
+         Donation unDonation = new Donation(id_utilisateur, id_projetcar, id_catedon, id_imagep, id_assocarita, montant_don, date_don);
         // insertion dans la base de données
-        Controleur.insertDonation(unDonation);
-        out.print("<br> Insertion réussie dans la base ");
+        controleur.Controleur.insertDonation(unDonation);
+        out.print("<br> Ajout réussie dans la base ");
     }
 
     if (request.getParameter("Modifier") != null) {
@@ -47,19 +48,19 @@
         int id_projetcar = Integer.parseInt(request.getParameter("id_projetcar"));
         int id_catedon = Integer.parseInt(request.getParameter("id_catedon"));
         int id_imagep = Integer.parseInt(request.getParameter("id_imagep"));
+        int id_assocarita = Integer.parseInt(request.getParameter("id_assocarita"));
         String montant_don = request.getParameter("montant_don");
         String date_don = request.getParameter("date_don");
   
 
         // instanciation de la classe Donation
-       Donation unDonation = new Donation(id_utilisateur, id_projetcar, id_catedon, id_imagep, montant_don, date_don);
+       Donation unDonation = new Donation(id_utilisateur, id_projetcar, id_catedon, id_imagep, id_assocarita, montant_don, date_don);
         // mise à jour dans la base de données
-        Controleur.updateDonation(unDonation);
+        controleur.Controleur.updateDonation(unDonation);
         out.print("<br> Mise à jour réussie dans la base ");
     }
 
-    ArrayList<VueDonnation> lesDonations = Controleur.selectAllVueDonations();
+    ArrayList<VueDonnation> lesDonations = controleur.Controleur.selectAllVueDonations();
 %>
 
 <%@ include file="vues/vue_select_donation.jsp" %>
-

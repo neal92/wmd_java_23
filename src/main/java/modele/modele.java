@@ -42,11 +42,17 @@ public class modele {
 	
 	
 	
-	/******************GESTTION DES Donations*************************/
+	/******************GESTION DES Donations*************************/
 	public static void insertDonation (Donation unDonation) {
-		String req = "insert into donnations values (null, '"+unDonation.getMontant_don()+"','"
-				+unDonation.getDate_don()+"', '"+unDonation.getId_utilisateur()+"','"+unDonation.getId_projetcar()+"', '"
-				+unDonation.getId_catedon()+"', '"+unDonation.getId_imagep()+"'); ";
+		String req = "insert into donnations values (null, '"
+			    + unDonation.getMontant_don() + "','"
+			    + unDonation.getDate_don() + "', '"
+			    + unDonation.getId_utilisateur() + "','"
+			    + unDonation.getId_assocarita() + "','" 
+			    + unDonation.getId_projetcar() + "', '"
+			    + unDonation.getId_catedon() + "', '"
+			    + unDonation.getId_imagep() + "'); ";
+
 		try {
 			maConnexion.seConnecter();
 			Statement unStat = (Statement) maConnexion.getMaConnexion().createStatement();
@@ -69,14 +75,15 @@ public class modele {
 			java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
 			ResultSet desRes = unStat.executeQuery(req);
 			while(desRes.next()) {
-				Donation unDonation =new Donation (
-					    desRes.getInt("id_donnation"), 
-					    desRes.getInt("id_utilisateur"),
-					    desRes.getInt("id_projetcar"), 
-					    desRes.getInt("id_catedon"), 
-					    desRes.getInt("id_imagep"), 
-					    desRes.getString("montant_don"), 
-					   desRes.getString("date_don")
+				Donation unDonation = new Donation(
+					    desRes.getInt("id_donnation"),
+					    desRes.getInt("id_utilisateur"), 
+					    desRes.getInt("id_projetcar"),
+					    desRes.getInt("id_catedon"),
+					    desRes.getInt("id_imagep"),
+					    desRes.getInt("id_assocarita"),
+					    desRes.getString("montant_don"),
+					    desRes.getString("date_don")
 					);
 
 				lesDonations.add(unDonation);			
@@ -93,7 +100,7 @@ public class modele {
 	}
 	
 	public static ArrayList<VueDonnation> selectAllVueDonation(){
-		String req ="select * from vueDonations;";
+		String req ="select * from vuedonations;";
 		ArrayList<VueDonnation> lesDonations = new ArrayList<VueDonnation>();
 		try {
 			maConnexion.seConnecter();
@@ -106,13 +113,15 @@ public class modele {
 					    desRes.getInt("id_projetcar"), 
 					    desRes.getInt("id_catedon"), 
 					    desRes.getInt("id_imagep"), 
+					    desRes.getInt("id_assocarita"),
 					    desRes.getString("montant_don"), 
 					   desRes.getString("date_don"), 
 					   desRes.getString("nom"),
 					   desRes.getString("prenom"),  
 					   desRes.getString("nom_cate_proj"),
 					   desRes.getString("nom_cate_don"),
-					   desRes.getString("nom_image_p")
+					   desRes.getString("nom_image_p"),
+					   desRes.getString("nom_asso_carita")
 					);
 
 				lesDonations.add(unDonation);			
@@ -129,7 +138,7 @@ public class modele {
 	}
 	
 	public static void deleteDonation (int id_donnation) {
-		String req = "delete from Donation where id_donnation= "+id_donnation+";";
+		String req = "delete from donnations where id_donnation= "+id_donnation+";";
 		try {
 			maConnexion.seConnecter();
 			Statement unStat = (Statement) maConnexion.getMaConnexion().createStatement();
@@ -152,16 +161,16 @@ public class modele {
 			java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
 			ResultSet desRes = unStat.executeQuery(req);
 			if (desRes.next()) {
-				 unDonation =new Donation (
-					    desRes.getInt("id_donnation"), 
-					    desRes.getInt("id_utilisateur"),
-					    desRes.getInt("id_projetcar"), 
-					    desRes.getInt("id_catedon"), 
-					    desRes.getInt("id_imagep"), 
-					    desRes.getString("montant_don"), 
-					   desRes.getString("date_don")
+				 unDonation = new Donation(
+					    desRes.getInt("id_donnation"),
+					    desRes.getInt("id_utilisateur"), 
+					    desRes.getInt("id_projetcar"),
+					    desRes.getInt("id_catedon"),
+					    desRes.getInt("id_imagep"),
+					    desRes.getInt("id_assocarita"),
+					    desRes.getString("montant_don"),
+					    desRes.getString("date_don")
 					);
-	
 			}
 			unStat.close();
 			maConnexion.seDeconnecter();
@@ -175,10 +184,15 @@ public class modele {
 	}
 	
 	public static void updateDonation (Donation unDonation) {
-		String req = "update donnations set id_utilisateur= '"+unDonation.getId_utilisateur()+"',id_projetcar ='"+unDonation.getId_projetcar()
-						+"',id_catedon ='"+unDonation.getId_catedon()+"',id_imagep ='"+unDonation.getId_imagep()+
-						"',montant_don ='"+unDonation.getMontant_don()+"',date_don ='"+unDonation.getDate_don()+
-						"',where id_donnation = "+unDonation.getId_donnation()+"; ";
+		String req = "UPDATE donnations SET id_utilisateur = '" + unDonation.getId_utilisateur() +
+	              "', id_projetcar = '" + unDonation.getId_projetcar() +
+	              "', id_catedon = '" + unDonation.getId_catedon() +
+	              "', id_imagep = '" + unDonation.getId_imagep() +
+	              "', montant_don = '" + unDonation.getMontant_don() +
+	              "', date_don = '" + unDonation.getDate_don() +
+	              "', id_assocarita = '" + unDonation.getId_assocarita() +
+	              "' WHERE id_donnation = " + unDonation.getId_donnation() + ";";
+
 		try {
 			maConnexion.seConnecter();
 			Statement unStat = (Statement) maConnexion.getMaConnexion().createStatement();
@@ -194,13 +208,18 @@ public class modele {
 	}
 	
 	public static ArrayList<Donation> selectLikeDonations(String filtre){
-		String req = "SELECT * FROM donnation " +
-	             "WHERE id_utilisateur LIKE '%" + filtre + "%' " +
+		String req = "SELECT * FROM donnations " +
+	             "WHERE id_donnation LIKE '%" + filtre + "%' " +
+	             "OR montant_don LIKE '%" + filtre + "%' " +
+	             "OR date_don LIKE '%" + filtre + "%' " +
+	             "OR id_utilisateur LIKE '%" + filtre + "%' " +
+	             "OR id_assocarita LIKE '%" + filtre + "%' " +
 	             "OR id_projetcar LIKE '%" + filtre + "%' " +
 	             "OR id_catedon LIKE '%" + filtre + "%' " +
-	             "OR id_imagep LIKE '%" + filtre + "%' " +
-	             "OR montant_don LIKE '%" + filtre + "%' " +
-	             "OR date_don LIKE '%" + filtre + "%';";
+	             "OR id_imagep LIKE '%" + filtre + "%';";
+
+	             
+
 
 		ArrayList<Donation> lesDonations = new ArrayList<Donation>();
 		try {
@@ -208,15 +227,17 @@ public class modele {
 			java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
 			ResultSet desRes = unStat.executeQuery(req);
 			while(desRes.next()) {
-				Donation unDonation =new Donation (
-					    desRes.getInt("id_donnation"), 
+				Donation unDonation = new Donation(
+					    desRes.getInt("id_donnation"),
 					    desRes.getInt("id_utilisateur"),
-					    desRes.getInt("id_projetcar"), 
-					    desRes.getInt("id_catedon"), 
-					    desRes.getInt("id_imagep"), 
+					    desRes.getInt("id_projetcar"),
+					    desRes.getInt("id_catedon"),
+					    desRes.getInt("id_imagep"),
+					    desRes.getInt("id_assocarita"),
 					    desRes.getString("montant_don"), 
-					   desRes.getString("date_don")
+					    desRes.getString("date_don")
 					);
+
 
 				lesDonations.add(unDonation);			
 			}

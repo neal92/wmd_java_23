@@ -11,7 +11,8 @@
     <table border="1">
         <tr>
             <td>Id Donation</td>
-            <td>Utilisateur</td>
+            <td>Nom Association Caritatif</td>
+            <td>Nom de l'utilisateur</td>
             <td>Projet Car</td>
             <td>Catedon</td>
             <td>Imagep</td>
@@ -22,8 +23,8 @@
         <%
             String chaineDonations = "";
             for (VueDonnation uneDonation : lesDonations) {
-                chaineDonations += "<tr>";
                 chaineDonations += "<td>" + uneDonation.getId_donnation() + "</td>";
+                chaineDonations += "<td>" + uneDonation.getNom_asso_carita() + "</td>";
                 chaineDonations += "<td>" + uneDonation.getNom() + "</td>";
                 chaineDonations += "<td>" + uneDonation.getNomproj() + "</td>";
                 chaineDonations += "<td>" + uneDonation.getNomdon()+ "</td>";
@@ -32,10 +33,10 @@
                 chaineDonations += "<td>" + uneDonation.getDate_don() + "</td>";
                 chaineDonations += "<td>";
 
-                chaineDonations += "<a href='index.jsp?page=1&action=sup&idDonation="
+                chaineDonations += "<a href='index.jsp?page=1&action=sup&id_donnation="
                         + uneDonation.getId_donnation() + "'> SUP </a>";
 
-                chaineDonations += "<a href='index.jsp?page=1&action=edit&idDonation="
+                chaineDonations += "<a href='index.jsp?page=1&action=edit&id_donnation="
                         + uneDonation.getId_donnation() + "'> EDIT </a>";
 
                 chaineDonations += "</td>";
