@@ -25,7 +25,8 @@
 		// demarrage de la session en cas de connexion.
 		if (unUtilisateur != null){
 			out.print("<br> Bienvenue" +unUtilisateur.getNom());
-			//$_SESSION ['email'] = $email
+			// Stockez les element de l'utilisateur dans la session
+			session.setAttribute("id_utilisateur", unUtilisateur.getIdutilisateur());
 			session.setAttribute("email", unUtilisateur.getEmail());
 			session.setAttribute("nom", unUtilisateur.getNom());
 			session.setAttribute("prenom", unUtilisateur.getPrenom());

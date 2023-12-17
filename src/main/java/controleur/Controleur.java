@@ -1,5 +1,8 @@
 package controleur;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
+
 import modele.modele;
 
 public class Controleur {
@@ -14,10 +17,10 @@ public class Controleur {
 
 
 	/********** Gestion des donations ************/
-	public static void insertDonation (Donation unDonation) {
-		modele.insertDonation(unDonation);
-		
-	}
+	 public static void insertDonation (Donation unDonation, HttpSession session) {
+		    modele.insertDonation(unDonation, session);
+		}
+
 	public static ArrayList<Donation> selectAllDonations (){
 		return modele.selectAllDonation();
 	}

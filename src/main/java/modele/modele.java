@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import controleur.Donation;
 
 import controleur.Utilisateur;
@@ -43,14 +45,16 @@ public class modele {
 	
 	
 	/******************GESTION DES Donations*************************/
-	public static void insertDonation (Donation unDonation) {
-		String req = "insert into donnations values (null, '"
-			    + unDonation.getMontant_don() + "','"
+	public static void insertDonation (Donation unDonation, HttpSession session) {
+		String req = "insert into donnations VALUES (null, '"
+				+ unDonation.getMontant_don() + "','"
 			    + unDonation.getDate_don() + "', '"
-			    + unDonation.getId_utilisateur() + "','"
+			    + (session.getAttribute("id_utilisateur") != null ?
+			    	      session.getAttribute("id_utilisateur") :
+			    	      "null") + "','"
 			    + unDonation.getId_assocarita() + "','" 
-			    + unDonation.getId_projetcar() + "', '"
-			    + unDonation.getId_catedon() + "', '"
+			    + unDonation.getId_projetcar() + "','"
+			    + unDonation.getId_catedon() + "','"
 			    + unDonation.getId_imagep() + "'); ";
 
 		try {

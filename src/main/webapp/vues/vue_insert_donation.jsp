@@ -11,9 +11,9 @@
     <form method="post">
         <table>
             <tr>
-                <td>ID Utilisateur</td>
+                <td>ID Utilisateur Connecté</td>
                 <td>
-                    <input type="text" name="id_utilisateur" value='<%= (leDonation != null) ? leDonation.getId_utilisateur() : "" %>'>
+                    <input type="text" name="id_utilisateur" value='<%= (session.getAttribute("id_utilisateur") != null) ? session.getAttribute("id_utilisateur") : "" %>' readonly>
                 </td>
             </tr>
             <tr>
@@ -37,9 +37,9 @@
             
             <tr>
                 <td>Id AssoCarita</td>
-            	<td>
-            		<input type="text" name="id_assocarita" value='<%= (leDonation != null) ? leDonation.getId_assocarita() : "" %>'>
-            	 </td>
+                <td>
+                    <input type="text" name="id_assocarita" value='<%= (leDonation != null) ? leDonation.getId_assocarita() : "" %>'>
+                </td>
             </tr>
             
             <tr>
@@ -55,7 +55,7 @@
                     <input type="date" name="date_don" value='<%= (leDonation != null) ? leDonation.getDate_don() : "" %>'>
                 </td>
             </tr>
-            	
+                
             <tr>
             <tr>            
                 <td></td>
