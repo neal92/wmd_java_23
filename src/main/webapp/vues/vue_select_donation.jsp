@@ -7,7 +7,7 @@
     <title>Liste des Donations</title>
 </head>
 <body>
-    <h3>Liste des Donations</h3>
+    <h5>Liste des Donations</h5>
     <table border="1">
         <tr>
             <td>Id Donation</td>
@@ -45,5 +45,7 @@
             out.print(chaineDonations);
         %>
     </table>
+    <br>
+    <br>
 </body>
 </html>

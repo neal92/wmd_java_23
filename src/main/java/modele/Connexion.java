@@ -16,7 +16,6 @@ private String serveur, bdd, user, mdp;
 		this.bdd = bdd;
 		this.user = user;
 		this.mdp = mdp;
-		this.maConnexion = null;
 	} 
 	
 	public void chargePilote () {

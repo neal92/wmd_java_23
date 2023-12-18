@@ -1,0 +1,45 @@
+@charset "ISO-8859-1";
+			
+			
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('public/images/famille.jpg'); /*  le chemin de l'image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+	
+        form {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        #footer-background {
+		    background-color: #74EC8D;
+		    position: fixed;
+		    bottom: 0;
+		    width: 100%; /* Pour occuper toute la largeur de la page */
+		}
+		
+   
+        
+

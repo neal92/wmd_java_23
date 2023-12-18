@@ -7,7 +7,9 @@
     <title>Ajouter un Donation</title>
 </head>
 <body>
-    <h3>Ajouter une Donation</h3>
+<br>
+<br>
+    <h5>Ajouter une Donation</h5>
     <form method="post">
         <table>
             <tr>
