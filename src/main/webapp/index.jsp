@@ -14,11 +14,14 @@
 	<%
 	if(session.getAttribute("email") == null){
 	
-	%> <%@ include file="vues/vue_form.jsp" %>  <%
+	%> <%@ include file="vue/vue_form.jsp" %>  <%
+			
+			
 	}
 	
 	String email, mdp_utilisateur ;
 	if (request.getParameter("SeConnecter")!=null){
+		
 		email = request.getParameter("email");
 		mdp_utilisateur = request.getParameter("mdp_utilisateur");
 		Utilisateur unUtilisateur = Controleur.selectWhereUtilisateur(email, mdp_utilisateur);
@@ -34,9 +37,9 @@
 			out.print("<br> Veuillez vérifier vos identifiants");
 		}
 	}
-	String menu = "<a href ='index.jsp?page=1'><img src =\'images/donation.jpg' height='100' width='200'> </a>";
+	String menu = "<a href ='index.jsp?page=1'><img src =\'images/donation.png' height='100' width='200'> </a>";
 	menu +="<a href ='index.jsp?page=2'><img src ='images/projet.png' height='100'width='100'> </a>";
-	menu +="<a href ='index.jsp?page=3'>DECONNEXION </a>";
+	menu +="<a href ='index.jsp?page=3'><img src ='images/deconnexion.png' height='100'width='100'> Deconnexion </a>";
 	if (session.getAttribute("email") !=null){
 		out.print(menu);
 	
@@ -51,14 +54,13 @@
 		unePage = 1;
 			}
 			switch(unePage){
-			case 1 :
-			%> <%@ include file="donation.jsp" %> <% break;
-			case 2 : session.invalidate();
-				response.sendRedirect("index.jsp");
-			break;
+			case 1 : %> <%@ include file="donation.jsp" %> <% break;
+			case 2 : %> <%@ include file="projet.jsp" %> <% break;
+			case 3 : session.invalidate();
+				response.sendRedirect("index.jsp");	
 			}
-	
-	} //fin du if session
+	  } 
+	//fin du if session
 	
 	%>
 

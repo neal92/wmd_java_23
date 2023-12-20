@@ -23,10 +23,11 @@
     }
 %>
 
-<%@ include file="vues/vue_insert_donation.jsp" %>
+<%@ include file="vue/vue_insert_donation.jsp" %>
 
 <%
     if (request.getParameter("Valider") != null) {
+    	out.print("insertion");
         int id_utilisateur = Integer.parseInt(request.getParameter("id_utilisateur"));
         int id_projetcar = Integer.parseInt(request.getParameter("id_projetcar"));
         int id_catedon = Integer.parseInt(request.getParameter("id_catedon"));
@@ -61,5 +62,5 @@
     ArrayList<Donation> lesDonations = Controleur.selectAllDonations();
 %>
 
-<%@ include file="vues/vue_select_donation.jsp" %>
+<%@ include file="vue/vue_select_donation.jsp" %>
 

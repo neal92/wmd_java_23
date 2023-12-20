@@ -4,11 +4,11 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Ajouter un Donation</title>
+    <title>Ajouter une Donation</title>
 </head>
 <body>
-    <h3>Ajouter un Donation</h3>
-    <form method="post" enctype="multipart/form-data">
+    <h3>Ajouter une Donation</h3>
+    <form method="post">
         <table>
             <tr>
                 <td>ID Utilisateur</td>
@@ -43,13 +43,14 @@
             <tr>
                 <td>Date Don</td>
                 <td>
-                    <input type="text" name="date_don" value='<%= (unDonation != null) ? unDonation.getDate_don() : "" %>'>
+                    <input type="date" name="date_don" value='<%= (unDonation != null) ? unDonation.getDate_don() : "" %>'>
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <input type="submit" <%= (unDonation != null) ? "name='Modifier' value='Modifier'" : "name='Valider' value='Valider'" %>>
+                    <input type="submit" <%= (unDonation != null) ? " name='Modifier' value='Modifier'" : "name='Valider' value='Valider'" %>
+                    >
                 </td>
             </tr>
         </table>

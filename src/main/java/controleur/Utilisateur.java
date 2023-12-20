@@ -100,6 +100,7 @@ public class Utilisateur {
 		return date_inscription;
 	}
 
+	
 	public void setDate_inscription(String date_inscription) {
 		this.date_inscription = date_inscription;
 	}

@@ -10,6 +10,8 @@ private String serveur, bdd, user, mdp;
 	
 	private Connection maConnexion ;
 
+	
+	
 	public Connexion(String serveur, String bdd, String user, String mdp) {
 		super();
 		this.serveur = serveur;

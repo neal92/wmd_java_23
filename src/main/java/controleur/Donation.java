@@ -1,6 +1,5 @@
 package controleur;
 
-import java.sql.Date;
 
 public class Donation {
 	private int id_donnation, id_utilisateur, id_projetcar, id_catedon, id_imagep;

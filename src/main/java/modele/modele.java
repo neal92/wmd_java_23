@@ -4,19 +4,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import controleur.Donation;
 
+import controleur.Donation;
+import controleur.Projet;
 import controleur.Utilisateur;
 
 public class modele {
-	private static Connexion maConnexion = new Connexion ("localhost", "wmd_23", "root", "root");
+	private static Connexion maConnexion = new Connexion ("localhost", "wmd_23", "root", "");
 	
 	
 	/****************Gesstion des Utilisateurs ********************/
 	public static Utilisateur selectWhereUtilisateur(String email, String mdp_utilisateur) {
 		String req ="select * from utilisateurs where email= '"+email+"' and mdp_utilisateur='"+mdp_utilisateur+"' ; "; 
 		Utilisateur unUtilisateur= null;
-		System.out.println(req);
+		 
 		try {
 			maConnexion.seConnecter();
 			java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
@@ -46,6 +47,7 @@ public class modele {
 		String req = "insert into donnations values (null, '"+unDonation.getMontant_don()+"','"
 				+unDonation.getDate_don()+"', '"+unDonation.getId_utilisateur()+"','"+unDonation.getId_projetcar()+"', '"
 				+unDonation.getId_catedon()+"', '"+unDonation.getId_imagep()+"'); ";
+		System.out.println(req);
 		try {
 			maConnexion.seConnecter();
 			Statement unStat = (Statement) maConnexion.getMaConnexion().createStatement();
@@ -192,4 +194,161 @@ public class modele {
 		return lesDonations;
 	}
 	
+	
+	/********************************* Gestion Projets_Carita******************************************************/
+	
+	
+	
+	 public static void insertProjet (Projet unProjet) {
+		  String req = "insert into projets_carita values (null, '"+unProjet.getTitre_p_car()+"','"+unProjet.getDescrip_p_car()
+		  +"','"+unProjet.getDate_debut_p_car()+"','"+unProjet.getDate_fin_p_car()+"','"+unProjet.getId_assocarita()
+		  +"','"+unProjet.getId_cateproj()+"','"+unProjet.getId_imagep()+"');";
+		 System.out.println(req);
+		  try {
+			  maConnexion.seConnecter();
+			  Statement unStat = maConnexion.getMaConnexion().createStatement();
+			  unStat.execute(req);
+			  unStat.close();
+			  maConnexion.seDeconnecter();
+			  
+		  }
+		  catch (SQLException exp) {
+			  System.out.println("Erreur d'execution:"+req);
+		  }
+	  }
+	  public static ArrayList<Projet> selectAllProjet(){
+		  String req = "select * from projets_carita ;";
+		  ArrayList<Projet> lesProjets = new ArrayList<Projet>();
+		  try {
+			  maConnexion.seConnecter();
+			  Statement unStat = maConnexion.getMaConnexion().createStatement();
+			  ResultSet desRes = unStat.executeQuery(req);
+			  while(desRes.next()) {
+			    Projet unProjet= new Projet(
+			    		desRes.getInt("id_projetcar"), 
+			    		desRes.getInt("id_assocarita"), 
+			    		desRes.getInt("id_cateproj"), 
+			    		desRes.getInt("id_imagep"),
+			    		desRes.getString("titre_p_car"),
+			    		desRes.getString("descrip_p_car"), 
+			    		desRes.getString("date_debut_p_car"),
+			    		desRes.getString("date_fin_p_car")
+			    		);
+			     lesProjets.add(unProjet);
+			  }
+			  unStat.close();
+			  maConnexion.seDeconnecter();
+		  }
+		    catch (SQLException exp) {
+		    	System.out.println("Erreur d'execution:"+req);
+		    }
+		  return lesProjets;
+		  
+	  }
+	  public static void deleteProjet (int id_projetcar) {
+		  String req = " delete from projets_carita where id_projetcar= "+id_projetcar+";";
+		  try {
+			  maConnexion.seConnecter();
+			  Statement unStat = maConnexion.getMaConnexion().createStatement();
+			  unStat.execute(req);
+			  unStat.close();
+			  maConnexion.seDeconnecter();
+			  
+		  }
+		  catch (SQLException exp) {
+			  System.out.println("Erreur d'execution:"+req);
+		  }
+		  
+	  }
+	  public static Projet selectWhereProjet(int id_projetcar) {
+		  
+		  String req = " select * from projets_carita where id_projetcar=" +id_projetcar+";";
+		  Projet unProjet = null;
+		  //System.out.println(req);
+		  try {
+			  maConnexion.seConnecter();
+			  Statement unStat = maConnexion.getMaConnexion().createStatement();
+			  ResultSet desRes = unStat.executeQuery(req);
+			 
+			  if(desRes.next()){
+			  unProjet= new Projet(
+			    		desRes.getInt("id_projetcar"), 
+			    		desRes.getInt("id_assocarita"), 
+			    		desRes.getInt("id_cateproj"), 
+			    		desRes.getInt("id_imagep"),
+			    		desRes.getString("titre_p_car"),
+			    		desRes.getString("descrip_p_car"), 
+			    		desRes.getString("date_debut_p_car"),
+			    		desRes.getString("date_fin_p_car")
+			    		);
+			  
+			  	}
+			  unStat.close();
+			  maConnexion.seDeconnecter();
+		  }
+		  catch(SQLException exp) {
+			  System.out.println("Erreur d'execution:"+req);
+			  exp.printStackTrace();
+		  }
+		  return unProjet;
+	  }
+	  public static void updateProjet(Projet unProjet) {
+		  String req = "update projets_carita set titre_p_car= '"+unProjet.getTitre_p_car()
+		  +"',descrip_p_car='"+unProjet.getDescrip_p_car()+"',date_debut_p_car ='"+unProjet.getDate_debut_p_car()
+		  +"',date_fin_p_car ='"+unProjet.getDate_fin_p_car()
+		  +"',id_assocarita ='"+unProjet.getId_assocarita()
+		  +"',id_cateproj ='"+unProjet.getId_cateproj()
+		  +"',id_imagep ='"+unProjet.getId_imagep()
+		  + "' where id_projetcar ="+unProjet.getId_projetcar()+";";
+		  
+		  try {
+			  maConnexion.seConnecter();
+			  Statement unStat = maConnexion.getMaConnexion().createStatement();
+			  unStat.execute(req);
+			  unStat.close();
+			  maConnexion.seDeconnecter();
+			  
+		  }
+		  catch (SQLException exp) {
+			  System.out.println("Erreur d'execution:"+req);
+		  }
+		  
+		  
+	  }
+     public static ArrayList<Projet> selectLikeProjets(String filtre){
+   	  String req = "select * from projets_carita where titre_p_car like'%"+filtre+"%' or descrip_p_car like '%"+filtre+"%' "
+   	  		+ "or date_debut_p_car like '%"+filtre+"%' "
+   	  	    + "or date_fin_p_car like '%"+filtre+"%' or id_assocarita like '%"+filtre+"%' "
+   	  	    + "or id_cateproj like '%"+filtre+"%' "
+            + "or id_imagep like '%"+filtre+"%';";
+   	  ArrayList<Projet> lesProjets = new ArrayList<Projet>();
+		  try {
+			  maConnexion.seConnecter();
+			  Statement unStat = maConnexion.getMaConnexion().createStatement();
+			  ResultSet desRes = unStat.executeQuery(req);
+			  while(desRes.next()) {
+			    Projet unProjet= new Projet(
+			    		desRes.getInt("id_projetcar"), 
+			    		desRes.getInt("id_assocarita"), 
+			    		desRes.getInt("id_cateproj"), 
+			    		desRes.getInt("id_imagep"),
+			    		desRes.getString("titre_p_car"),
+			    		desRes.getString("descrip_p_car"), 
+			    		desRes.getString("date_debut_p_car"),
+			    		desRes.getString("date_fin_p_car")
+			    		);
+			     lesProjets.add(unProjet);
+			  }
+			  unStat.close();
+			  maConnexion.seDeconnecter();
+		  }
+		    catch (SQLException exp) {
+		    	System.out.println("Erreur d'execution:"+req);
+		    }
+		  return lesProjets;
+		  
+		  
+		  
+   	  
+     }
 }
