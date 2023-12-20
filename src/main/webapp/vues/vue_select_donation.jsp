@@ -8,7 +8,8 @@
 </head>
 <body>
     <h5>Liste des Donations</h5>
-    <table border="1">
+    
+    <table border="1" class="table bg-dark text-light p-4">
         <tr>
             <td>Id Donation</td>
             <td>Nom Association Caritatif</td>

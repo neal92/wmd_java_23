@@ -3,7 +3,7 @@
 			
         body {
             font-family: Arial, sans-serif;
-            background-image: url('public/images/famille.jpg'); /*  le chemin de l'image */
+            background-image: url('../images/famille.jpg')!important ;/*  le chemin de l'image */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -39,6 +39,11 @@
 		    bottom: 0;
 		    width: 100%; /* Pour occuper toute la largeur de la page */
 		}
+		
+		h5 {
+		    color: white;
+		}
+
 		
    
         

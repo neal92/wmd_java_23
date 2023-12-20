@@ -43,4 +43,19 @@ public class Controleur {
 	 public static void updateDonation(Donation unDonation) {
 	        modele.updateDonation(unDonation);
 	 }
+	 
+	 
+	 public static ArrayList<CategorieDon> selectAllCategorieDons (){
+			return modele.selectAllCategorieDons();
+		}
+	 
+	 public static ArrayList<ProjetsCaritas> selectAllProjetsCaritas (){
+			return modele.selectAllProjetsCaritas();
+		}
+	 
+	 public static ArrayList<ImageP> selectAllImagesP (){
+			return modele.selectAllImagesP();
+		}
+		
+	 
  }

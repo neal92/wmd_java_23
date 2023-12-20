@@ -47,14 +47,16 @@
         int id_catedon = Integer.parseInt(request.getParameter("id_catedon"));
         int id_imagep = Integer.parseInt(request.getParameter("id_imagep"));
         int id_assocarita = Integer.parseInt(request.getParameter("id_assocarita"));
+        id_donnation = Integer.parseInt(request.getParameter("id_donnation"));
         String montant_don = request.getParameter("montant_don");
         String date_don = request.getParameter("date_don");
 
         // instanciation de la classe Donation
-        Donation unDonation = new Donation(id_utilisateur, id_projetcar, id_catedon, id_imagep, id_assocarita, montant_don, date_don);
+        Donation unDonation = new Donation(id_donnation, id_utilisateur, id_projetcar, id_catedon, id_imagep, id_assocarita, montant_don, date_don);
         // mise à jour dans la base de données
         controleur.Controleur.updateDonation(unDonation);
         out.print("<br> Mise à jour réussie dans la base ");
+        response.sendRedirect("index.jsp");
     }
 
     ArrayList<VueDonnation> lesDonations = controleur.Controleur.selectAllVueDonations();

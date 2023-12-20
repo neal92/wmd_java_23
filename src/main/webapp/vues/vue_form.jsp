@@ -11,8 +11,10 @@
         <form method="post">
             Email : <br>
             <input type="text" name="email"> <br>
+            <br>
             MDP : <br>
             <input type="password" name="mdp_utilisateur"> <br>
+            <br>
             <input type="submit" name="SeConnecter" value="Se Connecter">
         </form>
     </center>

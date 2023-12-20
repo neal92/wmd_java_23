@@ -7,37 +7,63 @@
     <title>Ajouter un Donation</title>
 </head>
 <body>
-<br>
-<br>
     <h5>Ajouter une Donation</h5>
-    <form method="post">
-        <table>
+    
+    <form method="post" class="bg-dark text-light">
+        
             <tr>
                 <td>ID Utilisateur Connecté</td>
                 <td>
                     <input type="text" name="id_utilisateur" value='<%= (session.getAttribute("id_utilisateur") != null) ? session.getAttribute("id_utilisateur") : "" %>' readonly>
                 </td>
             </tr>
+            <br>
             <tr>
-                <td>ID Projet Car</td>
+                <td>Selectionnez un Projet Caritatif</td>
                 <td>
-                    <input type="text" name="id_projetcar" value='<%= (leDonation != null) ? leDonation.getId_projetcar() : "" %>'>
+                   <select name="id_projetcar" >
+                   <%
+                   ArrayList<ProjetsCaritas> lesProjetsCaritas = Controleur.selectAllProjetsCaritas(); 
+                                      for (ProjetsCaritas unProjCarita : lesProjetsCaritas ){
+                                      out.print("<option value ='"+unProjCarita.getId_projetcar()+"'> "+ unProjCarita.getId_projetcar()+"-"+unProjCarita.getTitre_p_car()+"</option>"); 
+                                      }
+                   %>
+                   </select>
                 </td>
             </tr>
+            <br>
             <tr>
-                <td>ID Catedon</td>
+                <td>Selectionnez une Catégorie de Donation</td>
                 <td>
-                    <input type="text" name="id_catedon" value='<%= (leDonation != null) ? leDonation.getId_catedon() : "" %>'>
-                </td>
-            </tr>
-            <tr>
-                <td>ID Imagep</td>
-                <td>
-                    <input type="text" name="id_imagep" value='<%= (leDonation != null) ? leDonation.getId_imagep() : "" %>'>
+                   <select name="id_catedon" >
+                   <%
+                   ArrayList<CategorieDon> lesCategories = Controleur.selectAllCategorieDons(); 
+                                      for (CategorieDon uneCateg : lesCategories ){
+                                      out.print("<option value ='"+uneCateg.getId_catedon()+"'> "+ uneCateg.getNom_cate_don()+"</option>"); 
+                                      }
+                   %>
+                   </select>
                 </td>
             </tr>
             
             <tr>
+            <br>
+                <td>Selectionnez une Image</td>
+                <td>
+                <br>
+                   <select name="id_imagep" >
+                   <%
+                   ArrayList<ImageP> lesImagesP = Controleur.selectAllImagesP(); 
+                                      for (ImageP uneImageP : lesImagesP ){
+                                      out.print("<option value ='"+uneImageP.getId_imagep()+"'> "+ uneImageP.getNom_image_p()+"</option>"); 
+                                      }
+                   %>
+                   </select>
+                </td>
+            </tr>
+            
+            <tr>
+            <br>	
                 <td>Id AssoCarita</td>
                 <td>
                     <input type="text" name="id_assocarita" value='<%= (leDonation != null) ? leDonation.getId_assocarita() : "" %>'>
@@ -58,14 +84,14 @@
                 </td>
             </tr>
                 
-            <tr>
-            <tr>            
-                <td></td>
+            
+            <tr class="p-4">            
+              
                 <td>
                     <input type="submit" <%= (leDonation != null) ? "name='Modifier' value='Modifier'" : "name='Valider' value='Valider'" %>>
                 </td>
             </tr>
-        </table>
+  
         <!-- Ajoutez des champs cachés pour d'autres attributs de la classe Donation -->
         <%= (leDonation != null) ? "<input type='hidden' name='id_donnation' value='" + leDonation.getId_donnation() + "'>" : "" %>
     </form>
