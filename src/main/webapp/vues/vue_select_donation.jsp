@@ -14,7 +14,6 @@
             <td>Id Donation</td>
             <td>Nom Association Caritatif</td>
             <td>Nom de l'utilisateur</td>
-            <td>Projet Car</td>
             <td>Catedon</td>
             <td>Imagep</td>
             <td>Montant Don</td>
@@ -27,7 +26,6 @@
                 chaineDonations += "<td>" + uneDonation.getId_donnation() + "</td>";
                 chaineDonations += "<td>" + uneDonation.getNom_asso_carita() + "</td>";
                 chaineDonations += "<td>" + uneDonation.getNom() + "</td>";
-                chaineDonations += "<td>" + uneDonation.getNomproj() + "</td>";
                 chaineDonations += "<td>" + uneDonation.getNomdon()+ "</td>";
                 chaineDonations += "<td>" + uneDonation.getNomimage() + "</td>";
                 chaineDonations += "<td>" + uneDonation.getMontant_don() + "</td>";

@@ -3,13 +3,15 @@
 <h2>Gestion des Donations</h2>
 
 <%
+    // Récupération des paramètres pour effectuer des actions
     String action = "";
     int id_donnation = 0;
     Donation leDonation = null;
 
     if (request.getParameter("action") != null && request.getParameter("id_donnation") != null) {
         action = request.getParameter("action");
-        id_donnation = Integer.parseInt(request.getParameter("id_donnation"));
+        // Vérification avant la conversion
+        id_donnation = (request.getParameter("id_donnation") != null) ? Integer.parseInt(request.getParameter("id_donnation")) : 0;
 
         switch (action) {
             case "sup":
@@ -26,11 +28,11 @@
 
 <%
     if (request.getParameter("Valider") != null) {
-        int id_utilisateur = Integer.parseInt(session.getAttribute("id_utilisateur").toString());
-        int id_projetcar = Integer.parseInt(request.getParameter("id_projetcar"));
-        int id_catedon = Integer.parseInt(request.getParameter("id_catedon"));
-        int id_imagep = Integer.parseInt(request.getParameter("id_imagep"));
-        int id_assocarita = Integer.parseInt(request.getParameter("id_assocarita"));
+        int id_utilisateur = (session.getAttribute("id_utilisateur") != null) ? Integer.parseInt(session.getAttribute("id_utilisateur").toString()) : 0;
+        int id_projetcar = (request.getParameter("id_projetcar") != null) ? Integer.parseInt(request.getParameter("id_projetcar")) : 0;
+        int id_catedon = (request.getParameter("id_catedon") != null) ? Integer.parseInt(request.getParameter("id_catedon")) : 0;
+        int id_imagep = (request.getParameter("id_imagep") != null) ? Integer.parseInt(request.getParameter("id_imagep")) : 0;
+        int id_assocarita = (request.getParameter("id_assocarita") != null) ? Integer.parseInt(request.getParameter("id_assocarita")) : 0;
         String montant_don = request.getParameter("montant_don");
         String date_don = request.getParameter("date_don");
 
@@ -39,15 +41,16 @@
         // insertion dans la base de données
         controleur.Controleur.insertDonation(unDonation, session);
         out.print("<br> Ajout réussi dans la base ");
+        response.sendRedirect("index.jsp");
     }
 
     if (request.getParameter("Modifier") != null) {
-        int id_utilisateur = Integer.parseInt(session.getAttribute("id_utilisateur").toString());
-        int id_projetcar = Integer.parseInt(request.getParameter("id_projetcar"));
-        int id_catedon = Integer.parseInt(request.getParameter("id_catedon"));
-        int id_imagep = Integer.parseInt(request.getParameter("id_imagep"));
-        int id_assocarita = Integer.parseInt(request.getParameter("id_assocarita"));
-        id_donnation = Integer.parseInt(request.getParameter("id_donnation"));
+        int id_utilisateur = (session.getAttribute("id_utilisateur") != null) ? Integer.parseInt(session.getAttribute("id_utilisateur").toString()) : 0;
+        int id_projetcar = (request.getParameter("id_projetcar") != null) ? Integer.parseInt(request.getParameter("id_projetcar")) : 0;
+        int id_catedon = (request.getParameter("id_catedon") != null) ? Integer.parseInt(request.getParameter("id_catedon")) : 0;
+        int id_imagep = (request.getParameter("id_imagep") != null) ? Integer.parseInt(request.getParameter("id_imagep")) : 0;
+        int id_assocarita = (request.getParameter("id_assocarita") != null) ? Integer.parseInt(request.getParameter("id_assocarita")) : 0;
+        id_donnation = (request.getParameter("id_donnation") != null) ? Integer.parseInt(request.getParameter("id_donnation")) : 0;
         String montant_don = request.getParameter("montant_don");
         String date_don = request.getParameter("date_don");
 
@@ -61,5 +64,6 @@
 
     ArrayList<VueDonnation> lesDonations = controleur.Controleur.selectAllVueDonations();
 %>
+
 
 <%@ include file="vues/vue_select_donation.jsp" %>

@@ -57,5 +57,8 @@ public class Controleur {
 			return modele.selectAllImagesP();
 		}
 		
+	 public static ArrayList<AssociationCarita> selectAllAssociationCarita (){
+			return modele.selectAllAssociationCarita();
+		}
 	 
  }

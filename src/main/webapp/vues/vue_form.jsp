@@ -8,7 +8,7 @@
 </head>
 <body>
     <center>
-        <form method="post">
+        <form method="post" class="bg-dark text-light p-4">
             Email : <br>
             <input type="text" name="email"> <br>
             <br>

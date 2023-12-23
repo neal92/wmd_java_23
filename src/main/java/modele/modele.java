@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
+import controleur.AssociationCarita;
 import controleur.CategorieDon;
 import controleur.Donation;
 import controleur.ImageP;
@@ -338,5 +339,32 @@ public class modele {
 		
 	}
 	
+	public static ArrayList<AssociationCarita> selectAllAssociationCarita(){
+		String req ="select * from asso_carita;";
+		ArrayList<AssociationCarita> lesAssociationsCaritas = new ArrayList<AssociationCarita>();
+		try {
+			maConnexion.seConnecter();
+			java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
+			ResultSet desRes = unStat.executeQuery(req);
+			while(desRes.next()) {
+				AssociationCarita uneAssociationCarita =new AssociationCarita (
+					    desRes.getInt("id_assocarita"),desRes.getString("nom_asso_carita"),
+					   desRes.getString("descrip_asso_carita"),desRes.getString("pays_asso_carita"),
+					   desRes.getString("adresse_asso_carita"),desRes.getString("email_asso_carita"),
+					   desRes.getString("objectif_asso_carita")
+					);
+
+				lesAssociationsCaritas.add(uneAssociationCarita);			
+			}
+			unStat.close();
+			maConnexion.seDeconnecter();
+			
+		}
+		catch (SQLException exp) {
+			System.out.println("Erreur d'execution : " +req);
+		}
+		return lesAssociationsCaritas;
+		
+	}
 	
 }
