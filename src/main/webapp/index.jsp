@@ -56,11 +56,9 @@
 		            menu += "<span class='navbar-text ml-auto'>" + userEmail + "</span>";
 		        }
 	     
-		
 		        out.print(menu);
 		    %>
 		</nav>
-
 
 
             <%
