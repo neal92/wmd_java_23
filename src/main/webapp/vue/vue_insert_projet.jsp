@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -16,7 +17,7 @@
            <td>Titre_p_car</td>
            <td><input type="text" name ="titre_p_car" 
           value = '<%=  (leProjet != null)?leProjet.getTitre_p_car():"" %>'></td>
-        </tr 
+        </tr>
          <tr>
            <td>DescripProCarita</td>
            <td><input type="text" name ="descrip_p_car" 
@@ -24,12 +25,12 @@
         </tr>
          <tr>
            <td>Date Debut Projet Carita</td>
-           <td><input type="text" name ="date_debut_p_car" 
+           <td><input type="date" name ="date_debut_p_car" 
            value = '<%=  (leProjet != null)?leProjet.getDate_debut_p_car():"" %>'></td>
         </tr>
         <tr>
            <td>Date Fin Projet Carita</td>
-           <td><input type="text" name ="date_fin_p_car" 
+           <td><input type="date" name ="date_fin_p_car" 
            value = '<%=  (leProjet != null)?leProjet.getDate_fin_p_car():"" %>'></td>
         </tr>
         <tr>

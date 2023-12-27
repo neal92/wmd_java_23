@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+    <%@ page import="controleur.*" %>
+ <%@ page import="java.util.ArrayList"  %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
 <title>Insert title here</title>
 </head>
 <body>
@@ -41,13 +45,14 @@
         	 int id_imagep = Integer.parseInt(request.getParameter("id_imagep"));
         	 
         	 //instanciation de la classe Projet
-        	 Projet unProjet = new Projet(titre_p_car, descrip_p_car, date_debut_p_car, date_fin_p_car, id_assocarita, id_cateproj, id_imagep);
+        	 Projet unProjet = new Projet(id_assocarita, id_cateproj, id_imagep, titre_p_car, descrip_p_car, date_debut_p_car, date_fin_p_car);
         	 // insertion dans la base de données
         	 Controleur.insertProjet(unProjet);
         	 out.print("<br> Insertion réussie dans la base");
          }
       
       if(request.getParameter("Modifier")!= null){
+    	  
     	 String titre_p_car = request.getParameter("titre_p_car");
      	 String descrip_p_car = request.getParameter("descrip_p_car");
      	 String date_debut_p_car = request.getParameter("date_debut_p_car");
@@ -58,8 +63,8 @@
      	 int id_projetcar = Integer.parseInt(request.getParameter("id_projetcar"));
      	
      	
-     	 //instanciation de la classe Client
-     	 Projet unProjet = new Projet(id_projetcar, titre_p_car, descrip_p_car, date_debut_p_car, date_fin_p_car, id_assocarita, id_cateproj, id_imagep);
+     	 //instanciation de la classe Projet
+     	 Projet unProjet = new Projet(id_projetcar, id_assocarita, id_cateproj, id_imagep, titre_p_car, descrip_p_car, date_debut_p_car, date_fin_p_car);
      	 // insertion dans la base de données
      	 Controleur.updateProjet(unProjet);
      	 out.print("<br> Mise a jour réussie dans la base");

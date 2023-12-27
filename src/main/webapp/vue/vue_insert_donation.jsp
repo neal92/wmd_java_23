@@ -3,10 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Ajouter une Donation</title>
 </head>
 <body>
+  <style>
+
+  
+  </style>
     <h3>Ajouter une Donation</h3>
     <form method="post">
         <table>

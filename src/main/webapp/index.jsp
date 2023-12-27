@@ -6,21 +6,27 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Accueil WeMakeDonation</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+ <title>Accueil WeMakeDonation</title>
 </head>
 <body>
 <center>
-	<h1> Gestion de WeMakeDonation </h1>
+	
 	<%
 	if(session.getAttribute("email") == null){
 	
-	%> <%@ include file="vue/vue_form.jsp" %>  <%
+	%> 
+	 <h1> Gestion de WeMakeDonation </h1>
+	 <img src='images/logo.png' height='150' width='300'>
+	<%@ include file="vue/vue_form.jsp" %>  
+	
+	<%
 			
 			
 	}
 	
 	String email, mdp_utilisateur ;
-	if (request.getParameter("SeConnecter")!=null){
+	if (request.getParameter("SeConnecter")!= null){
 		
 		email = request.getParameter("email");
 		mdp_utilisateur = request.getParameter("mdp_utilisateur");
@@ -37,13 +43,14 @@
 			out.print("<br> Veuillez vérifier vos identifiants");
 		}
 	}
-	String menu = "<a href ='index.jsp?page=1'><img src =\'images/donation.png' height='100' width='200'> </a>";
-	menu +="<a href ='index.jsp?page=2'><img src ='images/projet.png' height='100'width='100'> </a>";
-	menu +="<a href ='index.jsp?page=3'><img src ='images/deconnexion.png' height='100'width='100'> Deconnexion </a>";
-	if (session.getAttribute("email") !=null){
-		out.print(menu);
 	
-	%>	
+	 if (session.getAttribute("email") != null) { %>
+     <div id='menu-container'>
+         <a class='menu-link' href ='index.jsp?page=1'><img src ='images/donation.png' height='100' width='100'>Donnation </a>
+         <a class='menu-link' href ='index.jsp?page=2'><img src ='images/projet.png' height='100' width='100'> Projet</a>
+         <a class='menu-link' href ='index.jsp?page=3'><img src ='images/deconnexion.png' height='100' width='100'> Deconnexion </a>
+     </div>	
+     
 	<%!
 	int unePage ;
 	%>
@@ -67,4 +74,7 @@
 </center>
 
 </body>
+<footer>
+
+</footer>
 </html>

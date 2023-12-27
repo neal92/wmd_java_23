@@ -143,7 +143,14 @@ public class modele {
 		String req = "update donnations set id_utilisateur= '"+unDonation.getId_utilisateur()+"',id_projetcar ='"+unDonation.getId_projetcar()
 						+"',id_catedon ='"+unDonation.getId_catedon()+"',id_imagep ='"+unDonation.getId_imagep()+
 						"',montant_don ='"+unDonation.getMontant_don()+"',date_don ='"+unDonation.getDate_don()+
-						"',where id_donnation = "+unDonation.getId_donnation()+"; ";
+						"'where id_donnation ="+unDonation.getId_donnation()+";";
+		
+		/*+"',id_cateproj ='"+unProjet.getId_cateproj()
+		  +"',id_imagep ='"+unProjet.getId_imagep()
+		  + "' where id_projetcar ="+unProjet.getId_projetcar()+";";*/
+		
+		
+		
 		try {
 			maConnexion.seConnecter();
 			Statement unStat = (Statement) maConnexion.getMaConnexion().createStatement();
