@@ -25,8 +25,8 @@ public class Controleur {
 		return modele.selectAllDonation();
 	}
 	
-	public static ArrayList<VueDonnation> selectAllVueDonations (){
-		return modele.selectAllVueDonation();
+	public static ArrayList<VueDonnation> selectAllVueDonnation (){
+		return modele.selectAllVueDonnation();
 	}
 	
 	
@@ -45,20 +45,60 @@ public class Controleur {
 	 }
 	 
 	 
-	 public static ArrayList<CategorieDon> selectAllCategorieDons (){
-			return modele.selectAllCategorieDons();
+
+	/********** Gestion des Projets ************/
+	 
+	public static void insertProjetCarita (ProjetsCaritas unProjet) {
+		modele.insertProjetCarita(unProjet);
+		
+	}
+	 public static ArrayList<ProjetsCaritas> selectAllProjetCarita (){
+			return modele.selectAllProjetCarita();
 		}
 	 
-	 public static ArrayList<ProjetsCaritas> selectAllProjetsCaritas (){
-			return modele.selectAllProjetsCaritas();
+		public static ArrayList<VueProjetCaritas> selectAllVueProjetCaritas (){
+			return modele.selectAllVueProjetCaritas();
 		}
+	 
+	public static ArrayList<ProjetsCaritas> selectLikeProjetCarita (String filtre){
+		return modele.selectLikeProjetCarita(filtre);
+	}
+	public static void deleteProjetCarita (int id_projetcar){
+		 modele.deleteProjetCarita(id_projetcar);
+	}
+	public static ProjetsCaritas selectWhereProjetCarita(int id_projetcar){
+		return modele.selectWhereProjetCarita(id_projetcar);
+	}
+	
+	 public static void updateProjetCarita(ProjetsCaritas unProjet) {
+	        modele.updateProjetCarita(unProjet);
+	 }
+	 
+	 
+	 
+	/********** Gestion des ImageP ************/
+
 	 
 	 public static ArrayList<ImageP> selectAllImagesP (){
 			return modele.selectAllImagesP();
 		}
-		
+	 
+	/********** Gestion des Association Carita ************/	 
+	 
 	 public static ArrayList<AssociationCarita> selectAllAssociationCarita (){
 			return modele.selectAllAssociationCarita();
 		}
 	 
- }
+	 
+	 /********** Gestion des Catégorie Dons ************/
+	 public static ArrayList<CategorieDon> selectAllCategorieDons (){
+			return modele.selectAllCategorieDons();
+		}
+	 
+	 /********** Gestion des Catégorie Projet ************/
+	 public static ArrayList<CategorieProjet> selectAllCategorieProjet (){
+			return modele.selectAllCategorieProjet();
+		}
+	 
+	}
+

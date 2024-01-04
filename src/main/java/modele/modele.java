@@ -8,11 +8,14 @@ import javax.servlet.http.HttpSession;
 
 import controleur.AssociationCarita;
 import controleur.CategorieDon;
+import controleur.CategorieProjet;
 import controleur.Donation;
 import controleur.ImageP;
 import controleur.ProjetsCaritas;
+import controleur.ProjetsCaritas;
 import controleur.Utilisateur;
 import controleur.VueDonnation;
+import controleur.VueProjetCaritas;
 
 public class modele {
 	private static Connexion maConnexion = new Connexion ("localhost", "wmd_23", "root", "root");
@@ -106,7 +109,7 @@ public class modele {
 		
 	}
 	
-	public static ArrayList<VueDonnation> selectAllVueDonation(){
+	public static ArrayList<VueDonnation> selectAllVueDonnation(){
 		String req ="select * from vuedonations;";
 		ArrayList<VueDonnation> lesDonations = new ArrayList<VueDonnation>();
 		try {
@@ -256,7 +259,11 @@ public class modele {
 	}
 		return lesDonations;
 	}
+	
+	
 
+	
+/********************************* Gestion Categorie Dons******************************************************/
 	
 	public static ArrayList<CategorieDon> selectAllCategorieDons(){
 		String req ="select * from cate_don;";
@@ -285,86 +292,285 @@ public class modele {
 		
 	}
 	
-	public static ArrayList<ProjetsCaritas> selectAllProjetsCaritas(){
-		String req ="select * from projets_carita;";
-		ArrayList<ProjetsCaritas> lesProjetsCaritas = new ArrayList<ProjetsCaritas>();
-		try {
-			maConnexion.seConnecter();
-			java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
-			ResultSet desRes = unStat.executeQuery(req);
-			while(desRes.next()) {
-				ProjetsCaritas unProjetCarita =new ProjetsCaritas (
-					    desRes.getInt("id_projetcar"),desRes.getInt("id_assocarita"),
-					    desRes.getInt("id_cateproj"),desRes.getInt("id_imagep"),
-					   desRes.getString("titre_p_car"),desRes.getString("descrip_p_car"),
-					   desRes.getString("date_debut_p_car"),desRes.getString("date_fin_p_car")
-					);
 
-				lesProjetsCaritas.add(unProjetCarita);			
-			}
-			unStat.close();
-			maConnexion.seDeconnecter();
-			
+/********************************* Gestion Projets_Carita******************************************************/
+
+
+
+public static void insertProjetCarita (ProjetsCaritas unProjetCarita) {
+	  String req = "insert into projets_carita values (null, '"+unProjetCarita.getTitre_p_car()+"','"+unProjetCarita.getDescrip_p_car()
+	  +"','"+unProjetCarita.getDate_debut_p_car()+"','"+unProjetCarita.getDate_fin_p_car()+"','"+unProjetCarita.getId_assocarita()
+	  +"','"+unProjetCarita.getId_cateproj()+"','"+unProjetCarita.getId_imagep()+"');";
+	 System.out.println(req);
+	  try {
+		  maConnexion.seConnecter();
+		  Statement unStat = maConnexion.getMaConnexion().createStatement();
+		  unStat.execute(req);
+		  unStat.close();
+		  maConnexion.seDeconnecter();
+		  
+	  }
+	  catch (SQLException exp) {
+		  System.out.println("Erreur d'execution:"+req);
+	  }
+ }
+public static ArrayList<ProjetsCaritas> selectAllProjetCarita(){
+	String req ="select * from projets_carita;";
+	ArrayList<ProjetsCaritas> lesProjetsCaritas = new ArrayList<ProjetsCaritas>();
+	try {
+		maConnexion.seConnecter();
+		java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
+		ResultSet desRes = unStat.executeQuery(req);
+		while(desRes.next()) {
+			ProjetsCaritas unProjetCarita =new ProjetsCaritas (
+				    desRes.getInt("id_projetcar"),desRes.getInt("id_assocarita"),
+				    desRes.getInt("id_cateproj"),desRes.getInt("id_imagep"),
+				   desRes.getString("titre_p_car"),desRes.getString("descrip_p_car"),
+				   desRes.getString("date_debut_p_car"),desRes.getString("date_fin_p_car")
+				);
+
+			lesProjetsCaritas.add(unProjetCarita);			
 		}
-		catch (SQLException exp) {
-			System.out.println("Erreur d'execution : " +req);
-		}
-		return lesProjetsCaritas;
+		unStat.close();
+		maConnexion.seDeconnecter();
 		
 	}
+	catch (SQLException exp) {
+		System.out.println("Erreur d'execution : " +req);
+	}
+	return lesProjetsCaritas;
 	
-	public static ArrayList<ImageP> selectAllImagesP(){
-		String req ="select * from images_p;";
-		ArrayList<ImageP> lesImagesP = new ArrayList<ImageP>();
-		try {
-			maConnexion.seConnecter();
-			java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
-			ResultSet desRes = unStat.executeQuery(req);
-			while(desRes.next()) {
-				ImageP uneImageP =new ImageP (
-					    desRes.getInt("id_imagep"),desRes.getInt("id_projetcar"),
-					   desRes.getString("nom_image_p"),desRes.getString("chemin_image_p")
-					);
+}
 
-				lesImagesP.add(uneImageP);			
+ public static void deleteProjetCarita (int id_projetcar) {
+	  String req = " delete from projets_carita where id_projetcar= "+id_projetcar+";";
+	  try {
+		  maConnexion.seConnecter();
+		  Statement unStat = maConnexion.getMaConnexion().createStatement();
+		  unStat.execute(req);
+		  unStat.close();
+		  maConnexion.seDeconnecter();
+		  
+	  }
+	  catch (SQLException exp) {
+		  System.out.println("Erreur d'execution:"+req);
+	  }
+	  
+ }
+ public static ProjetsCaritas selectWhereProjetCarita(int id_projetcar) {
+	  
+	  String req = " select * from projets_carita where id_projetcar=" +id_projetcar+";";
+	  ProjetsCaritas unProjetCarita = null;
+	  //System.out.println(req);
+	  try {
+		  maConnexion.seConnecter();
+		  Statement unStat = maConnexion.getMaConnexion().createStatement();
+		  ResultSet desRes = unStat.executeQuery(req);
+		 
+		  if(desRes.next()){
+		  unProjetCarita= new ProjetsCaritas(
+		    		desRes.getInt("id_projetcar"), 
+		    		desRes.getInt("id_assocarita"), 
+		    		desRes.getInt("id_cateproj"), 
+		    		desRes.getInt("id_imagep"),
+		    		desRes.getString("titre_p_car"),
+		    		desRes.getString("descrip_p_car"), 
+		    		desRes.getString("date_debut_p_car"),
+		    		desRes.getString("date_fin_p_car")
+		    		);
+		  
+		  	}
+		  unStat.close();
+		  maConnexion.seDeconnecter();
+	  }
+	  catch(SQLException exp) {
+		  System.out.println("Erreur d'execution:"+req);
+		  exp.printStackTrace();
+	  }
+	  return unProjetCarita;
+ }
+ 
+ public static void updateProjetCarita(ProjetsCaritas unProjetCarita) {
+	  String req = "update projets_carita set titre_p_car= '"+unProjetCarita.getTitre_p_car()
+	  +"',descrip_p_car='"+unProjetCarita.getDescrip_p_car()+"',date_debut_p_car ='"+unProjetCarita.getDate_debut_p_car()
+	  +"',date_fin_p_car ='"+unProjetCarita.getDate_fin_p_car()
+	  +"',id_assocarita ='"+unProjetCarita.getId_assocarita()
+	  +"',id_cateproj ='"+unProjetCarita.getId_cateproj()
+	  +"',id_imagep ='"+unProjetCarita.getId_imagep()
+	  + "' where id_projetcar ="+unProjetCarita.getId_projetcar()+";";
+	  
+	  try {
+		  maConnexion.seConnecter();
+		  Statement unStat = maConnexion.getMaConnexion().createStatement();
+		  unStat.execute(req);
+		  unStat.close();
+		  maConnexion.seDeconnecter();
+		  
+	  }
+	  catch (SQLException exp) {
+		  System.out.println("Erreur d'execution:"+req);
+	  }
+	  
+	  
+ }
+public static ArrayList<ProjetsCaritas> selectLikeProjetCarita(String filtre){
+	  String req = "select * from projets_carita where titre_p_car like'%"+filtre+"%' or descrip_p_car like '%"+filtre+"%' "
+	  		+ "or date_debut_p_car like '%"+filtre+"%' "
+	  	    + "or date_fin_p_car like '%"+filtre+"%' or id_assocarita like '%"+filtre+"%' "
+	  	    + "or id_cateproj like '%"+filtre+"%' "
+       + "or id_imagep like '%"+filtre+"%';";
+	  ArrayList<ProjetsCaritas> lesProjetsCaritas = new ArrayList<ProjetsCaritas>();
+	  try {
+		  maConnexion.seConnecter();
+		  Statement unStat = maConnexion.getMaConnexion().createStatement();
+		  ResultSet desRes = unStat.executeQuery(req);
+		  while(desRes.next()) {
+		    ProjetsCaritas unProjetCarita= new ProjetsCaritas(
+		    		desRes.getInt("id_projetcar"), 
+		    		desRes.getInt("id_assocarita"), 
+		    		desRes.getInt("id_cateproj"), 
+		    		desRes.getInt("id_imagep"),
+		    		desRes.getString("titre_p_car"),
+		    		desRes.getString("descrip_p_car"), 
+		    		desRes.getString("date_debut_p_car"),
+		    		desRes.getString("date_fin_p_car")
+		    		);
+		    lesProjetsCaritas.add(unProjetCarita);
+		  }
+		  unStat.close();
+		  maConnexion.seDeconnecter();
+	  }
+	    catch (SQLException exp) {
+	    	System.out.println("Erreur d'execution:"+req);
+	    }
+	  return lesProjetsCaritas;  
+}
+
+
+public static ArrayList<VueProjetCaritas> selectAllVueProjetCaritas() {
+    String req = "SELECT * FROM vueprojetcaritas;";
+    ArrayList<VueProjetCaritas> lesProjetsCaritas = new ArrayList<VueProjetCaritas>();
+
+    try {
+        maConnexion.seConnecter();
+        java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
+        ResultSet desRes = unStat.executeQuery(req);
+
+        while (desRes.next()) {
+            VueProjetCaritas unProjetCarita = new VueProjetCaritas(
+                desRes.getInt("id_projetcar"),
+                desRes.getString("titre_p_car"),
+                desRes.getString("descrip_p_car"),
+                desRes.getString("date_debut_p_car"),
+                desRes.getString("date_fin_p_car"),
+                desRes.getString("nom_asso_carita"),
+                desRes.getString("nom_cate_proj"),
+                desRes.getString("nom_image_p")
+            );
+
+            lesProjetsCaritas.add(unProjetCarita);
+        }
+
+        unStat.close();
+        maConnexion.seDeconnecter();
+
+    } catch (SQLException exp) {
+        System.out.println("Erreur d'execution : " + req);
+    }
+
+    return lesProjetsCaritas;
+}
+
+/********************************* Gestion Association_Carita******************************************************/
+
+		public static ArrayList<AssociationCarita> selectAllAssociationCarita(){
+			String req ="select * from asso_carita;";
+				ArrayList<AssociationCarita> lesAssociationsCaritas = new ArrayList<AssociationCarita>();
+				try {
+					maConnexion.seConnecter();
+					java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
+					ResultSet desRes = unStat.executeQuery(req);
+					while(desRes.next()) {
+						AssociationCarita uneAssociationCarita =new AssociationCarita (
+							    desRes.getInt("id_assocarita"),desRes.getString("nom_asso_carita"),
+							   desRes.getString("descrip_asso_carita"),desRes.getString("pays_asso_carita"),
+							   desRes.getString("adresse_asso_carita"),desRes.getString("email_asso_carita"),
+							   desRes.getString("objectif_asso_carita")
+							);
+			
+						lesAssociationsCaritas.add(uneAssociationCarita);			
+					}
+					unStat.close();
+					maConnexion.seDeconnecter();
+					
+				}
+				catch (SQLException exp) {
+					System.out.println("Erreur d'execution : " +req);
+				}
+				return lesAssociationsCaritas;
+				
 			}
-			unStat.close();
-			maConnexion.seDeconnecter();
+		
+		
+		
+		
+/********************************* Gestion Image_P******************************************************/
+		
+		public static ArrayList<ImageP> selectAllImagesP(){
+			String req ="select * from images_p;";
+			ArrayList<ImageP> lesImagesP = new ArrayList<ImageP>();
+			try {
+				maConnexion.seConnecter();
+				java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
+				ResultSet desRes = unStat.executeQuery(req);
+				while(desRes.next()) {
+					ImageP uneImageP =new ImageP (
+						    desRes.getInt("id_imagep"),desRes.getInt("id_projetcar"),
+						   desRes.getString("nom_image_p"),desRes.getString("chemin_image_p")
+						);
+
+					lesImagesP.add(uneImageP);			
+				}
+				unStat.close();
+				maConnexion.seDeconnecter();
+				
+			}
+			catch (SQLException exp) {
+				System.out.println("Erreur d'execution : " +req);
+			}
+			return lesImagesP;
 			
 		}
-		catch (SQLException exp) {
-			System.out.println("Erreur d'execution : " +req);
-		}
-		return lesImagesP;
 		
-	}
-	
-	public static ArrayList<AssociationCarita> selectAllAssociationCarita(){
-		String req ="select * from asso_carita;";
-		ArrayList<AssociationCarita> lesAssociationsCaritas = new ArrayList<AssociationCarita>();
-		try {
-			maConnexion.seConnecter();
-			java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
-			ResultSet desRes = unStat.executeQuery(req);
-			while(desRes.next()) {
-				AssociationCarita uneAssociationCarita =new AssociationCarita (
-					    desRes.getInt("id_assocarita"),desRes.getString("nom_asso_carita"),
-					   desRes.getString("descrip_asso_carita"),desRes.getString("pays_asso_carita"),
-					   desRes.getString("adresse_asso_carita"),desRes.getString("email_asso_carita"),
-					   desRes.getString("objectif_asso_carita")
-					);
+		
+/********************************* Gestion Catégorie Projet******************************************************/
 
-				lesAssociationsCaritas.add(uneAssociationCarita);			
+		
+		public static ArrayList<CategorieProjet> selectAllCategorieProjet(){
+			String req ="select * from cate_projets;";
+			ArrayList<CategorieProjet> lesCategoriesProjets= new ArrayList<CategorieProjet>();
+			try {
+				maConnexion.seConnecter();
+				java.sql.Statement unStat = maConnexion.getMaConnexion().createStatement();
+				ResultSet desRes = unStat.executeQuery(req);
+				while(desRes.next()) {
+					CategorieProjet uneCategorieProjet =new CategorieProjet (
+						    desRes.getInt("id_cateproj"),
+						   desRes.getString("nom_cate_proj"),desRes.getString("descrip_cate_proj")
+						);
+
+					lesCategoriesProjets.add(uneCategorieProjet);			
+				}
+				unStat.close();
+				maConnexion.seDeconnecter();
+				
 			}
-			unStat.close();
-			maConnexion.seDeconnecter();
+			catch (SQLException exp) {
+				System.out.println("Erreur d'execution : " +req);
+			}
+			return lesCategoriesProjets;
 			
 		}
-		catch (SQLException exp) {
-			System.out.println("Erreur d'execution : " +req);
-		}
-		return lesAssociationsCaritas;
 		
-	}
-	
+
 }

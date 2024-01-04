@@ -21,66 +21,72 @@
         <%
         }
 
-        String email, mdp_utilisateur;
-        if (request.getParameter("SeConnecter") != null) {
-            email = request.getParameter("email");
-            mdp_utilisateur = request.getParameter("mdp_utilisateur");
-            Utilisateur unUtilisateur = Controleur.selectWhereUtilisateur(email, mdp_utilisateur);
-            if (unUtilisateur != null) {
-                session.setAttribute("id_utilisateur", unUtilisateur.getIdutilisateur());
-                session.setAttribute("email", unUtilisateur.getEmail());
-                session.setAttribute("nom", unUtilisateur.getNom());
-                session.setAttribute("prenom", unUtilisateur.getPrenom());
-                response.sendRedirect("index.jsp?page=1");
-            } else {
-                out.print("<br> Veuillez vérifier vos identifiants");
-            }
-        }
-        
-        if (session.getAttribute("email") != null) {
-            // Affiche la barre de navigation si l'utilisateur est connecté
+                String email, mdp_utilisateur;
+                if (request.getParameter("SeConnecter") != null) {
+                    email = request.getParameter("email");
+                    mdp_utilisateur = request.getParameter("mdp_utilisateur");
+                    Utilisateur unUtilisateur = Controleur.selectWhereUtilisateur(email, mdp_utilisateur);
+                    if (unUtilisateur != null) {
+                        session.setAttribute("id_utilisateur", unUtilisateur.getIdutilisateur());
+                        session.setAttribute("email", unUtilisateur.getEmail());
+                        session.setAttribute("nom", unUtilisateur.getNom());
+                        session.setAttribute("prenom", unUtilisateur.getPrenom());
+                        response.sendRedirect("index.jsp?page=1");
+                    } else {
+                        out.print("<br> Veuillez vérifier vos identifiants");
+                    }
+                }
+                
+                if (session.getAttribute("email") != null) {
+                    // Affiche la barre de navigation si l'utilisateur est connecté
         %>
 
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		    <% 
-		    
-		        String menu = "<a class='navbar-brand' href ='index.jsp?page=1'>Donations</a>";
-		        menu += "<a class='navbar-brand' href ='index.jsp?page=2'>Projets</a>";
-		        menu += "<a class='navbar-brand' href ='index.jsp?page=3' style='color: red;'>DECONNEXION</a>";
-		
-		        // Récupérer l'e-mail de l'utilisateur depuis la session
-		        String userEmail = (String) session.getAttribute("prenom");
-		
-		        // Afficher l'e-mail de l'utilisateur à droite
-		        if (userEmail != null) {
-		            menu += "<span class='navbar-text ml-auto'>" + userEmail + "</span>";
-		        }
-	     
-		        out.print(menu);
+		    <%
+		    String menu = "<a class='navbar-brand' href ='index.jsp?page=1'>Donations</a>";
+		    		        menu += "<a class='navbar-brand' href ='index.jsp?page=2'>Projets</a>";
+		    		        menu += "<a class='navbar-brand' href ='index.jsp?page=3' style='color: red;'>DECONNEXION</a>";
+		    		
+		    		        // Récupérer l'e-mail de l'utilisateur depuis la session
+		    		        String userEmail = (String) session.getAttribute("prenom");
+		    		
+		    		        // Afficher l'e-mail de l'utilisateur à droite
+		    		        if (userEmail != null) {
+		    		            menu += "<span class='navbar-text ml-auto'>" + userEmail + "</span>";
+		    		        }
+		    	     
+		    		        out.print(menu);
 		    %>
 		</nav>
 
 
-            <%
-            int unePage;
-            if (request.getParameter("page") != null) {
-                unePage = Integer.parseInt(request.getParameter("page"));
-            } else {
-                unePage = 1;
-            }
-            switch (unePage) {
-                case 1:
-      			  %>
-                    <%@ include file="donation.jsp" %>
-      			  <%
-                    break;
-                case 3:
-                    session.invalidate();
-                    response.sendRedirect("index.jsp");
-                    break;
-            }
-        } // fin du if session
-        %>
+		<%
+		int unePage ;
+		%>
+			<%
+			if (request.getParameter("page")!=null){
+					unePage = Integer.parseInt(request.getParameter("page"));
+						}else{
+					unePage = 1;
+						}
+					switch(unePage){
+					case 1 :
+			%> 
+			<%@ include file="donation.jsp" %> <%
+ break;
+ 	case 2 :
+ %> 
+			<%@ include file="projet.jsp" %> <% break;
+			
+			case 3 : session.invalidate();
+				response.sendRedirect("index.jsp");
+			break;
+			}
+			
+			} //fin du if session
+			
+			%>
+
     </center>
 
 

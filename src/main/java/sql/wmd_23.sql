@@ -226,6 +226,28 @@
         JOIN images_p i ON d.id_imagep = i.id_imagep
         LEFT JOIN asso_carita ac ON d.id_assocarita = ac.id_assocarita
     );
+    
+            -- Creation VueProjetCaritas
+
+            CREATE VIEW vueprojetcarita AS
+        SELECT
+            pc.id_projetcar,
+            pc.titre_p_car,
+            pc.descrip_p_car,
+            pc.date_debut_p_car,
+            pc.date_fin_p_car,
+            ac.nom_asso_carita,
+            cp.nom_cate_proj,
+            ip.nom_image_p
+        FROM
+            projets_carita pc
+        JOIN
+            asso_carita ac ON pc.id_assocarita = ac.id_assocarita
+        JOIN
+            cate_projets cp ON pc.id_cateproj = cp.id_cateproj
+        JOIN
+            images_p ip ON pc.id_imagep = ip.id_imagep;
+
 
     --Insert Donnations
     INSERT INTO donnations (montant_don, date_don, id_utilisateur, id_assocarita, id_projetcar, id_catedon, id_imagep)

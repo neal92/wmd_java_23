@@ -23,7 +23,7 @@
                         <label for="id_projetcar" class="form-label">Sélectionnez un Projet Caritatif</label>
                         <select class="form-select" id="id_projetcar" name="id_projetcar">
                             <%
-                                ArrayList<ProjetsCaritas> lesProjetsCaritas = Controleur.selectAllProjetsCaritas();
+                                ArrayList<ProjetsCaritas> lesProjetsCaritas = controleur.Controleur.selectAllProjetCarita();
                                 for (ProjetsCaritas unProjCarita : lesProjetsCaritas) {
                                     out.print("<option value='" + unProjCarita.getId_projetcar() + "'> " + unProjCarita.getId_projetcar() + "-" + unProjCarita.getTitre_p_car() + "</option>");
                                 }
@@ -35,7 +35,7 @@
                         <label for="id_catedon" class="form-label">Sélectionnez une Catégorie de Donation</label>
                         <select class="form-select" id="id_catedon" name="id_catedon">
                             <%
-                                ArrayList<CategorieDon> lesCategories = Controleur.selectAllCategorieDons();
+                                ArrayList<CategorieDon> lesCategories = controleur.Controleur.selectAllCategorieDons();
                                 for (CategorieDon uneCateg : lesCategories) {
                                     out.print("<option value='" + uneCateg.getId_catedon() + "'> " + uneCateg.getNom_cate_don() + "</option>");
                                 }
@@ -49,7 +49,7 @@
                       
 
                             <%
-                                ArrayList<ImageP> lesImagesP = Controleur.selectAllImagesP();
+                                ArrayList<ImageP> lesImagesP = controleur.Controleur.selectAllImagesP();
                                 for (ImageP uneImageP : lesImagesP) {
                                     out.print("<option value='" + uneImageP.getId_imagep() + "'> " + uneImageP.getNom_image_p() + "</option>");
                                 }
@@ -61,7 +61,7 @@
                         <label for="id_assocarita" class="form-label">Sélectionnez une Association Caritative</label>
                         <select class="form-select" id="id_assocarita" name="id_assocarita">
                             <%
-                                ArrayList<AssociationCarita> lesAssociationsCaritas = Controleur.selectAllAssociationCarita();
+                                ArrayList<AssociationCarita> lesAssociationsCaritas = controleur.Controleur.selectAllAssociationCarita();
                                 for (AssociationCarita uneAssociationCarita : lesAssociationsCaritas) {
                                     out.print("<option value='" + uneAssociationCarita.getId_assocarita() + "'> " + uneAssociationCarita.getNom_asso_carita() + "</option>");
                                 }

@@ -4,18 +4,22 @@ public class CategorieDon {
 	private int id_catedon ; 
 	private String nom_cate_don ; 
 	private String descrip_cate_don ;
+	
 	public CategorieDon(int id_catedon, String nom_cate_don, String descrip_cate_don) {
 		super();
 		this.id_catedon = id_catedon;
 		this.nom_cate_don = nom_cate_don;
 		this.descrip_cate_don = descrip_cate_don;
 	} 
+	
 	public CategorieDon(String nom_cate_don, String descrip_cate_don) {
 		super();
 		this.id_catedon = 0;
 		this.nom_cate_don = nom_cate_don;
 		this.descrip_cate_don = descrip_cate_don;
 	}
+	
+	
 	public int getId_catedon() {
 		return id_catedon;
 	}

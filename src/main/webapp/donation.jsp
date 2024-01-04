@@ -62,7 +62,7 @@
         response.sendRedirect("index.jsp");
     }
 
-    ArrayList<VueDonnation> lesDonations = controleur.Controleur.selectAllVueDonations();
+    ArrayList<VueDonnation> lesDonations = controleur.Controleur.selectAllVueDonnation();
 %>
 
 

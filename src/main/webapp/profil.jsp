@@ -14,13 +14,10 @@
 		    String userNom = (String) session.getAttribute("nom");
 		    String userPrenom = (String) session.getAttribute("prenom");
 		
-		    // Ajoutez d'autres attributs d'utilisateur au besoin
-		
-		    // Affichez les informations de l'utilisateur
 		%>
 <h1>Profil de <%= userPrenom %> <%= userNom %></h1>
 <p>Email : <%= userEmail %></p>
-<!-- Ajoutez d'autres champs d'information de l'utilisateur au besoin -->
+
 
 
 </body>
